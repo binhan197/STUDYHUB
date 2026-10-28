@@ -444,6 +444,82 @@ dialog::backdrop{background:rgba(35,21,31,.55)}
  .video-first-detail .embed-shell{min-height:0;width:100%;aspect-ratio:16/9}
  .video-quick-actions .source-link{margin-left:0}
 }
+
+/* Structural essentials for the simplified sidebar and the mobile lesson player. */
+.side-section-header{
+ display:flex;align-items:center;justify-content:space-between;
+ gap:10px;min-height:32px
+}
+.side-section-tools{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.side-section-title{display:block}
+.side-section-count{display:inline-flex;align-items:center;justify-content:center;border-radius:999px;padding:3px 8px}
+.side-mini-action{display:inline-flex;align-items:center;justify-content:center;border-radius:8px;padding:5px 9px}
+.side-tail{display:flex;flex-direction:column;gap:10px}
+.side-device{
+ display:flex;align-items:center;gap:9px;width:100%;text-align:left;
+ padding:12px;min-height:45px
+}
+.side-device-icon{font-size:16px}
+.side-footnote{font-size:11px;line-height:1.6;margin:0 5px}
+.side-footnote a{text-decoration:underline;text-underline-offset:3px}
+.course-meter{display:block;height:5px;width:min(150px,100%);border-radius:10px;overflow:hidden;margin-top:6px}
+.course-meter span{display:block;height:100%;border-radius:10px}
+.library-settings-button{
+ display:inline-flex;align-items:center;justify-content:center;
+ min-height:35px;padding:8px 12px;gap:6px;font-size:12px;
+ font-weight:700;border-radius:10px;cursor:pointer
+}
+.library-tools-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:15px}
+.library-tools-grid .btn{justify-content:flex-start;min-height:48px;padding:13px}
+.library-tools-note{font-size:13px;line-height:1.65}
+.library-tools-advanced{border-top:1px solid #EBD8E2;padding-top:14px;margin-top:19px}
+.library-tools-advanced summary{cursor:pointer;font-size:12px;font-weight:750}
+.library-tools-advanced p{font-size:12px;line-height:1.6}
+.video-first-detail{display:flex;flex-direction:column;gap:12px}
+.video-first-detail .embed-shell{
+ display:block;background:#1B151C;width:100%;margin:0;
+ min-height:0;aspect-ratio:16/9;overflow:hidden;border-radius:12px
+}
+.video-first-detail .embed-shell iframe{
+ display:block;width:100%;height:100%;aspect-ratio:16/9;border:0
+}
+.video-first-detail .resource-cover{min-height:170px;padding:22px}
+.video-quick-actions{display:flex;flex-wrap:wrap;gap:8px;margin:0}
+.video-quick-actions .source-link{margin-left:auto}
+.lesson-notes-collapse,.lesson-info-collapse{border-radius:11px;overflow:hidden}
+.lesson-notes-collapse summary,.lesson-info-collapse summary{
+ display:list-item;cursor:pointer;list-style-position:inside;
+ font-size:13px;font-weight:760
+}
+.notes-content,.lesson-about{padding:14px}
+.notes-content label{display:block;font-size:12px;font-weight:760;margin-bottom:8px}
+.notes-content textarea{
+ display:block;width:100%;padding:11px;border-radius:9px;
+ min-height:140px;resize:vertical;font-size:14px;line-height:1.55
+}
+.notes-content small{display:block;margin-top:7px;font-size:11px;line-height:1.6}
+.lesson-about .detail-desc{margin:10px 0 0}
+.video-first-detail .detail-edit{margin-top:3px}
+.dialog-top h2{line-height:1.35}
+dialog#lessonDialog{width:min(860px,calc(100vw - 24px));max-width:860px;max-height:94dvh;overscroll-behavior:contain}
+dialog#lessonDialog .dialog-top{position:sticky;top:0;z-index:4;padding:12px 17px}
+dialog#lessonDialog .dialog-top h2{font-size:17px}
+dialog#lessonDialog .dialog-top small{display:none}
+dialog#lessonDialog .dialog-body{padding:13px 16px 20px}
+@media(max-width:760px){
+ .side-section-header{gap:6px}
+ .library-tools-grid{grid-template-columns:1fr}
+ .video-quick-actions .source-link{margin-left:0}
+ dialog#lessonDialog[open]{
+  position:fixed;inset:0;width:100vw;max-width:100vw;
+  height:100dvh;max-height:100dvh;margin:0;border:0;border-radius:0;
+  padding:0;overflow-y:auto
+ }
+ dialog#lessonDialog .dialog-top{padding:calc(12px + env(safe-area-inset-top,0px)) 13px 11px}
+ dialog#lessonDialog .dialog-top h2{font-size:15px}
+ dialog#lessonDialog .dialog-body{padding:10px 10px calc(22px + env(safe-area-inset-bottom,0px))}
+}
+
 </style></head>
 <body><div class="app"><aside class="sidebar" id="sidebar" aria-label="Study navigation"></aside><div class="sidebar-backdrop" id="sidebarBackdrop"></div><main id="main" class="main" tabindex="-1"></main></div><dialog id="editDialog" aria-label="Edit library item"></dialog><dialog id="lessonDialog" aria-label="Lesson details"></dialog><dialog id="installDialog" aria-label="Install Study Hub"></dialog><input id="importFile" type="file" accept=".json,application/json" hidden><div class="save-notice" id="toast" role="status" aria-live="polite"></div><script type="application/json" id="seed-data">{
   "schemaVersion": 2,
