@@ -112,3 +112,10 @@ Learning target: After the end-plate potential passes threshold, sarcolemmal AP 
 - SNARE/synaptotagmin animations in the MSU resource are videos embedded in an open neuroscience textbook. Advanced EPP current recordings use freely available technical reading since no suitable direct Khan Academy video was established.
 - Ninja Nerd Part 2 primarily concerns **Lecture #07 Skeletal Muscle Physiology**, not the core of Lecture #06, so it is placed as an optional bridge.
 - Repeat links in different sections are intentional study checkpoints; until unified progress tracking is built, completion marks are per resource.
+
+## Additional verified Khan Academy coverage
+
+1. **[Musculoskeletal system disorders — including myasthenia gravis](https://www.khanacademy.org/science/how-does-the-human-body-work/x0fe8768432761c62%3Alocomotion-and-movement/x0fe8768432761c62%3Ajoints-and-disorders-of-the-musculoskeletal-system/v/musculoskeletal-system-disorders)** — introductory Khan Academy video for slide 26. Not a complete LEMS lecture.
+2. **[Signal propagation: The movement of signals between neurons](https://www.khanacademy.org/test-prep/mcat/organ-systems/neural-synapses/a/signal-propagation-the-movement-of-signals-between-neurons)** — Khan Academy written study guide that mentions Ca²⁺-activated synaptotagmin and neurotransmitter release, useful for slides 16–18. Not a video.
+
+These supplementary Khan Academy entries are placed first in their corresponding Study Hub sections. The earlier MCAT practice link whose URL slug mentions “neurofibromin mutations” is nevertheless a **verified** Khan Academy exercise titled “Neuromuscular junction: Repetitive nerve stimulation in myasthenia gravis”; the URL slug is misleading but the actual published content is relevant.

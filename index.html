@@ -1719,6 +1719,17 @@
               "folders": [],
               "resources": [
                 {
+                  "id": "l06-khan-synaptotagmin-reading",
+                  "title": "REVIEW — Khan Academy: Signal Propagation & Synaptotagmin",
+                  "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/neural-synapses/a/signal-propagation-the-movement-of-signals-between-neurons",
+                  "provider": "Khan Academy",
+                  "type": "article",
+                  "description": "Slides 16–18. Khan Academy reading explains presynaptic Ca2+, synaptotagmin and neurotransmitter fusion. Use POSTECH and MSU for detailed SNARE molecular mechanisms.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
                   "id": "l06-release-01",
                   "title": "FOUNDATION — Khan Academy: Neurotransmitter Release",
                   "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/neural-synapses/v/neurotransmitter-release",
@@ -1855,6 +1866,17 @@
               "level": "advanced",
               "folders": [],
               "resources": [
+                {
+                  "id": "l06-khan-mg-overview",
+                  "title": "FOUNDATION — Khan Academy: Musculoskeletal System Disorders (Myasthenia Gravis Overview)",
+                  "url": "https://www.khanacademy.org/science/how-does-the-human-body-work/x0fe8768432761c62%3Alocomotion-and-movement/x0fe8768432761c62%3Ajoints-and-disorders-of-the-musculoskeletal-system/v/musculoskeletal-system-disorders",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slide 26. Introductory overview including myasthenia gravis (MG) and other musculoskeletal diseases. Not a detailed treatment of Lambert–Eaton or SNARE toxin mechanisms.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
                 {
                   "id": "l06-pathology-01",
                   "title": "CLINICAL — Ninja Nerd: Neuromuscular Junction Pathologies Part 4",
@@ -2040,6 +2062,20 @@ try{const stored=localStorage.getItem(KEY),old=localStorage.getItem(LEGACY_KEY);
  if(localCourse.folders.some(f=>f.id===template.id))return;
  localCourse.folders.push(clone(template));
  try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){storeAvailable=false}
+})();
+// Add verified Khan Academy supplements to Lecture 06 without resetting progress or notes.
+(function mergeLecture06KhanSupplement(){
+ const reference=SEED.courses.find(c=>c.id==='course-physiology')?.folders?.find(f=>f.id==='folder-lecture-06-neuromuscular-transmission');
+ const actual=(data.courses||[]).find(c=>c.id==='course-physiology'||c.name==='Physiology')?.folders?.find(f=>f.id==='folder-lecture-06-neuromuscular-transmission');
+ if(!reference||!actual)return;
+ let changed=false;
+ for(const key of ['l06-khan-mg-overview','l06-khan-synaptotagmin-reading']){
+  const srcFolder=reference.folders.find(f=>f.resources.some(r=>r.id===key));
+  const dstFolder=actual.folders?.find(f=>f.id===srcFolder?.id);
+  const sourceItem=srcFolder?.resources.find(r=>r.id===key);
+  if(dstFolder&&sourceItem&&!dstFolder.resources.some(r=>r.id===key)){dstFolder.resources.unshift(clone(sourceItem));changed=true;}
+ }
+ if(changed)try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){storeAvailable=false;}
 })();
 let collapsed=new Set();try{const saved=JSON.parse(localStorage.getItem(FOLD_KEY)||'null');if(Array.isArray(saved)){collapsed=new Set(saved)}else{for(const c of data.courses)walkFolders(c,(f,parent,depth)=>{if(depth>=2)collapsed.add(f.id)})}}catch(e){}
 let selected=data.courses[0]?.id||null, activeFolder=null, search='', filter='all', kind='all', currentDetail=null, dragging=null;
