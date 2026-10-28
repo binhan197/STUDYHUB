@@ -92,7 +92,7 @@ Learning target: After the end-plate potential passes threshold, sarcolemmal AP 
 
 1. **[NEXT LECTURE PREVIEW — Ninja Nerd: Excitation–Contraction Coupling Part 2](https://www.youtube.com/watch?v=A96kAMPZXv8)** — Ninja Nerd (video). Slides 16, 18 and 25 briefly show muscle AP after EPP; this extension clarifies the next steps. Optional until Lecture #07.
 
-2. **[FOUNDATION — Khan Academy: Role of the Sarcoplasmic Reticulum in Muscle](https://www.khanacademy.org/science/mcat/organ-systems/muscular-system/v/role-of-the-sarcoplasmic-reticulum-in-muscle-cells)** — Khan Academy (video). Optional bridge to Lecture #07. Learn the sarcoplasmic reticulum as the source of Ca2+ for skeletal muscle contraction, not via gap junction-mediated excitation between fibers.
+2. **[FOUNDATION — Khan Academy: Role of the Sarcoplasmic Reticulum in Muscle](https://www.khanacademy.org/science/biology/human-biology/muscles/v/role-of-the-sarcoplasmic-reticulum-in-muscle-cells)** — Khan Academy (video). Optional bridge to Lecture #07. Learn the sarcoplasmic reticulum as the source of Ca2+ for skeletal muscle contraction, not via gap junction-mediated excitation between fibers.
 
 ## Study questions (what, why, how)
 
