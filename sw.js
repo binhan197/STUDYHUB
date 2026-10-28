@@ -1,5 +1,5 @@
 /* Study Hub app-shell cache. Does not cache external videos or personal user data. */
-const CACHE_NAME='studyhub-shell-2026-10-29-pwa-v6-deep-rose';
+const CACHE_NAME='studyhub-shell-2026-10-29-pwa-v7-soft-rose';
 const APP_FILES=['./','./index.html','./manifest.webmanifest','./icons/icon-192.png','./icons/icon-512.png','./icons/icon.svg'];
 const SHELL_URL=new URL('index.html',self.registration.scope).href;
 self.addEventListener('install',event=>{event.waitUntil(caches.open(CACHE_NAME).then(cache=>cache.addAll(APP_FILES)).then(()=>self.skipWaiting()));});
