@@ -1,0 +1,730 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><meta name="description" content="Study Hub — organize videos into nested course folders, maintain notes and track progress offline."><title>Study Hub · Course Learning Tree</title><style>
+  :root{--bg:#f6f7f8;--paper:#fff;--ink:#1e2934;--muted:#66717e;--line:#e4e8ed;--accent:#285a62;--accent-light:#edf5f4;--dark:#152631;--dark2:#223742;--card:#fff;--radius:16px;--shadow:0 8px 32px rgba(30,47,64,.045)}
+  *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;color:var(--ink)}
+  button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #7ab1b5;outline-offset:3px}
+  .app{min-height:100vh;display:grid;grid-template-columns:270px minmax(0,1fr)}
+  .sidebar{background:var(--dark);color:#e8eff2;padding:25px 17px 20px;position:sticky;top:0;height:100vh;overflow:auto;display:flex;flex-direction:column;gap:16px}
+  .brand{display:flex;gap:11px;align-items:center;padding:0 9px 12px}.brand-mark{width:37px;height:37px;background:#3a6a70;border:1px solid #587f80;border-radius:12px;display:grid;place-items:center;color:#f3fffa;font-size:20px;font-weight:700}.brand-title{font-weight:700;font-size:15px;letter-spacing:-.3px;line-height:1.2}.brand-sub{font-size:11px;color:#adbec4;margin-top:3px}
+  .side-label{color:#96aab2;letter-spacing:1.3px;text-transform:uppercase;font-weight:700;font-size:10px;padding:0 11px;margin:9px 0 2px}.course-nav,.section-nav{display:flex;flex-direction:column;gap:4px}.nav-entry,.section-entry{border:1px solid transparent;color:#d5e1e4;background:transparent;width:100%;text-align:left;border-radius:10px;padding:11px 10px;display:flex;align-items:center;gap:10px}.nav-entry:hover,.section-entry:hover{background:#263d47}.nav-entry.active,.section-entry.active{background:#31515a;border-color:#46666e;color:white}.nav-entry strong{font-size:13px;display:block}.nav-entry small{color:#b1c4c8;font-size:11px}.nav-circle{height:27px;width:27px;display:grid;place-items:center;border-radius:8px;background:#415964;flex-shrink:0;font-size:12px}.section-entry{font-size:12px;padding:8px 9px;color:#b5c8cb}.section-entry>span:first-child{font-variant-numeric:tabular-nums;color:#9ab2b6}.section-entry .mini-dot{margin-left:auto;font-size:10px}
+  .side-actions{display:grid;gap:8px}.side-secondary{background:#25414a;color:#d7e8e9;border:1px solid #3b5861;padding:10px 12px;border-radius:10px;text-align:left;font-size:12px;display:flex;gap:9px;align-items:center}.side-secondary:hover{background:#31535c}.side-links{margin-top:auto;border-top:1px solid #38505a;padding:16px 9px 0;color:#abc0c3;font-size:12px}.side-links a{display:block;margin-top:8px;text-decoration:underline;text-underline-offset:3px}.side-links a:hover{color:white}
+  .sidebar-backdrop{display:none}.main{min-width:0;max-width:1560px;width:100%;padding:34px clamp(20px,4vw,64px) 75px;margin:auto}
+  .header-top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.crumb{font-size:12px;color:#6d7b86}.status-pill{display:flex;align-items:center;gap:7px;background:white;border:1px solid var(--line);border-radius:100px;padding:7px 11px;color:#617079;font-size:11px;white-space:nowrap}.status-pill i{display:block;width:7px;height:7px;border-radius:99px;background:#6c9c86}
+  .hero{border-radius:20px;background:linear-gradient(120deg,#ebf1ef 0%,#f5f8f7 56%,#e7edf0 100%);border:1px solid #e0e9e8;box-shadow:var(--shadow);padding:30px 32px 28px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;border:45px solid #c4dad6;opacity:.23;right:-92px;top:-132px;pointer-events:none}.eyebrow{text-transform:uppercase;letter-spacing:2px;color:#51737b;font-size:11px;font-weight:800}.hero h1{font-size:clamp(26px,3vw,36px);line-height:1.14;letter-spacing:-1.2px;margin:12px 0 12px;max-width:760px}.hero p{font-size:14px;color:#5c6d71;max-width:680px;margin:0 0 22px;line-height:1.65}.hero-bottom{display:flex;gap:10px;flex-wrap:wrap;position:relative;z-index:1}.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid var(--line);background:#fff;color:#334450;border-radius:11px;padding:10px 14px;font-weight:600;font-size:12px;line-height:1.2;transition:background .13s,transform .13s}.btn:hover{background:#f1f5f4}.btn:active{transform:translateY(1px)}.btn.primary{background:#27565f;color:#fff;border-color:#27565f}.btn.primary:hover{background:#1d4249}.btn.subtle{background:transparent;border-color:transparent;color:#5c6870}.btn.subtle:hover{background:#f1f5f6}.btn.danger{color:#ae4d47;border-color:#eddbd8}.btn.sm{padding:7px 10px;font-size:11px;border-radius:8px}.btn:disabled{opacity:.43;cursor:not-allowed}.btn.iconbtn{padding:7px 9px}
+  .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:20px 0 28px}.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:17px 18px;min-width:0}.stat-num{font-size:27px;line-height:1.2;font-weight:750;letter-spacing:-.5px}.stat-label{color:#75818b;font-size:11px;margin-top:5px;white-space:nowrap}.stat .progress-track{margin-top:12px}
+  .progress-track{height:6px;background:#e8ebed;border-radius:20px;overflow:hidden}.progress-fill{height:100%;background:#51857d;border-radius:20px;transition:width .2s}
+  .controls{display:flex;justify-content:space-between;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:23px}.title-block h2{font-size:20px;letter-spacing:-.5px;margin:0}.title-block p{font-size:12px;color:var(--muted);margin:4px 0 0}.toolbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px}.searchbox{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:10px;padding:0 11px;background:#fff;min-width:190px}.searchbox svg{color:#7b8993}.searchbox input{border:0;outline:none;padding:10px 0;width:190px;min-width:0;font-size:12px;background:transparent}.toolbar select{border-radius:10px;padding:10px 12px;background:white;border:1px solid var(--line);color:#586771;font-size:12px;max-width:180px}
+  .section-card{background:var(--paper);border:1px solid var(--line);box-shadow:var(--shadow);border-radius:17px;margin-bottom:15px;overflow:hidden;scroll-margin-top:18px}.section-heading{display:flex;gap:15px;align-items:center;padding:20px 22px;cursor:pointer}.section-index{border:1px solid #d8e7e3;background:var(--accent-light);border-radius:11px;min-width:42px;height:42px;display:grid;place-items:center;font-size:13px;color:#47776e;font-weight:750}.section-meta{flex:1;min-width:0}.section-name{font-size:16px;font-weight:720;letter-spacing:-.3px;margin:0;display:flex;flex-wrap:wrap;align-items:center;gap:8px}.tag{display:inline-flex;align-items:center;white-space:nowrap;border-radius:6px;padding:3px 6px;font-weight:700;font-size:9px;letter-spacing:.3px;text-transform:uppercase;border:1px solid #e2e6e8;color:#687684;background:#f8f9fa}.tag.advanced{background:#f1eef8;color:#736b8e;border-color:#e6e0f1}.tag.video{background:#edf5f4;color:#437c71;border-color:#dceee9}.section-goal{font-size:12px;color:#75828b;margin-top:5px;line-height:1.5}.section-progress{display:flex;align-items:center;gap:9px;font-size:11px;color:#80909a;white-space:nowrap}.section-progress .progress-track{width:67px}.section-caret{font-size:17px;color:#8a989c;padding-left:4px}.section-body{border-top:1px solid #eff1f2;padding:5px 15px 14px}.section-actions{display:flex;justify-content:flex-end;gap:5px;margin:6px 5px 8px;flex-wrap:wrap}
+  .lesson-row{display:flex;gap:12px;align-items:flex-start;padding:13px 9px;border-radius:11px;border:1px solid transparent;transition:background .12s,border-color .12s}.lesson-row:hover{background:#fafcfc;border-color:#edf0f0}.lesson-row.dragging{opacity:.4}.lesson-row.dropmark{border-color:#76a89e;background:#f0f8f4}.check{width:21px;height:21px;border:1.5px solid #c8d5d7;border-radius:7px;background:#fff;margin-top:4px;display:grid;place-items:center;font-weight:800;font-size:13px;color:#fff;flex:none}.check:hover{border-color:#628f8a}.check.checked{background:#51857d;border-color:#51857d}.lesson-number{font-size:10px;font-weight:750;color:#87959d;min-width:24px;margin-top:7px}.lesson-main{flex:1;min-width:0}.lesson-title{font-size:13px;line-height:1.4;font-weight:670;color:#243846;display:inline;text-align:left;border:0;background:transparent;padding:0}.lesson-title:hover{color:#226b70;text-decoration:underline;text-underline-offset:3px}.lesson-row.completed .lesson-title{color:#73828a}.lesson-description{color:#71818b;font-size:11px;line-height:1.45;margin:4px 0 6px}.lesson-tags{display:flex;gap:6px;flex-wrap:wrap;font-size:10px;color:#83919a}.lesson-tags span:before{content:"·";margin-right:6px;color:#aab5b9}.lesson-tags span:first-child:before{display:none}.lesson-side{display:flex;align-items:center;gap:4px;flex-shrink:0}.tinybtn{border:0;background:transparent;border-radius:7px;width:29px;height:29px;color:#8a979d;display:grid;place-items:center;font-size:17px}.tinybtn:hover{background:#edf4f3;color:#2d6168}.tinybtn.star-on{color:#9c7c38}.tinybtn svg{width:15px;height:15px}.a-link{font-size:11px;border:1px solid #dee6e6;border-radius:8px;padding:6px 9px;color:#396870;font-weight:650;background:#fff}.a-link:hover{background:#eef5f3}.empty{border:1px dashed #d7dddf;border-radius:15px;background:#fff;text-align:center;padding:46px 18px;color:#76868c;font-size:13px}.empty strong{display:block;color:#425c64;font-size:16px;margin-bottom:5px}
+  .save-notice{position:fixed;bottom:20px;right:22px;background:#244d51;color:#fff;padding:10px 14px;border-radius:10px;box-shadow:0 8px 30px #15323c33;font-size:12px;z-index:160;opacity:0;transform:translateY(10px);transition:opacity .2s,transform .2s;pointer-events:none}.save-notice.show{opacity:1;transform:translateY(0)}
+  dialog{border:0;border-radius:18px;padding:0;color:var(--ink);width:min(650px,calc(100vw - 28px));max-height:min(90vh,900px);box-shadow:0 24px 80px #14263044;overflow:auto}dialog::backdrop{background:#12262e99;backdrop-filter:blur(3px)}.dialog-top{padding:22px 25px 18px;border-bottom:1px solid var(--line);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.dialog-top h2{font-size:20px;line-height:1.3;letter-spacing:-.4px;margin:0 0 4px}.dialog-top small{color:var(--muted)}.dialog-body{padding:23px 25px}.dialog-footer{padding:14px 25px 21px;display:flex;justify-content:flex-end;gap:8px}.x{font-size:20px;width:32px;height:32px;border:0;background:#f2f5f6;border-radius:10px;color:#657580}.field{margin-bottom:17px}.field label{font-size:12px;font-weight:700;display:block;margin:0 0 7px;color:#49606e}.field input,.field textarea,.field select{display:block;border-radius:9px;border:1px solid #dae2e5;width:100%;padding:11px 12px;background:#fff;color:#253845;font-size:13px}.field textarea{resize:vertical;min-height:80px}.field-hint{font-size:11px;color:#829099;margin:4px 0 0}.field-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.form-error{color:#a34140;font-size:12px;min-height:18px;margin-top:7px}
+  .lesson-detail .detail-meta{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}.lesson-detail .detail-desc{color:#596c77;font-size:13px;margin:0 0 16px}.embed-shell{background:#172833;aspect-ratio:16/9;border-radius:12px;overflow:hidden;display:grid;place-items:center;margin-bottom:17px;position:relative}.embed-shell iframe{width:100%;height:100%;border:0}.embed-placeholder{text-align:center;color:#d9e9ea;padding:15px}.embed-placeholder strong{display:block;font-size:15px;margin-bottom:7px}.embed-placeholder span{font-size:12px;color:#a9c0c3}.detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}.note-box{border:1px solid #dde6e5;border-radius:12px;background:#f9fbfa;padding:13px}.note-box h3{font-size:13px;margin:0 0 8px}.note-box textarea{width:100%;min-height:132px;resize:vertical;border:1px solid #d8e3e2;background:white;padding:11px;border-radius:9px;font-size:13px;line-height:1.5}.note-box small{color:#7b8b90;font-size:10px;display:block;margin-top:5px}.detail-edit{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:19px;border-top:1px solid var(--line);padding-top:16px}.detail-edit .danger-zone{color:#ab5551}
+  .footer{font-size:11px;color:#89969d;margin-top:25px;line-height:1.7}.mobile-menu{display:none}.toast-error{background:#893e3e}.tipbox{padding:12px 14px;border:1px solid #dce7e8;background:#f4f8f8;color:#526e76;border-radius:11px;font-size:12px;margin-bottom:15px;line-height:1.6}
+  @media(max-width:1070px){.app{grid-template-columns:235px minmax(0,1fr)}.sidebar{padding-left:10px;padding-right:10px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.section-progress .progress-track{display:none}.lesson-side .reorder{display:none}}
+  @media(max-width:760px){.app{display:block}.sidebar{position:fixed;z-index:50;left:-280px;width:270px;top:0;bottom:0;transition:left .2s;box-shadow:10px 0 28px #1026312c}.sidebar.show{left:0}.sidebar-backdrop{display:none;position:fixed;inset:0;background:#07191e80;z-index:45}.sidebar-backdrop.show{display:block}.mobile-menu{display:inline-flex}.main{padding:17px 14px 55px}.header-top{margin-bottom:15px}.hero{padding:22px}.hero h1{font-size:28px}.stat{padding:14px}.stat-num{font-size:24px}.stat-label{white-space:normal}.controls{align-items:stretch}.toolbar{width:100%}.searchbox{flex:1;min-width:0}.searchbox input{width:100%}.section-heading{padding:17px 12px;gap:10px}.section-index{min-width:35px;height:35px}.section-name{font-size:14px}.section-body{padding:5px 6px 10px}.lesson-row{padding:13px 7px;gap:8px}.lesson-number{display:none}.lesson-side{flex-wrap:wrap;justify-content:flex-end;width:65px}.lesson-side .a-link{padding:5px 7px}.field-grid{grid-template-columns:1fr}.dialog-body,.dialog-top,.dialog-footer{padding-left:17px;padding-right:17px}}
+  @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;transition:none!important}}
+  
+/* Study Hub 2 — unlimited-depth course folder hierarchy */
+.course-side-name{flex:1;min-width:0}.course-side-name strong{overflow-wrap:anywhere}.folder-nav{display:flex;flex-direction:column;gap:2px;margin-bottom:2px;max-height:40vh;overflow:auto;scrollbar-width:thin}.tree-item{display:flex;align-items:center;gap:2px;padding-left:calc(var(--depth)*12px);min-width:0}.tree-caret{background:none;color:#b7cbd0;border:0;min-width:20px;height:27px;border-radius:6px;padding:0;font-size:14px}.tree-caret:hover{background:#2d4c58}.tree-link{display:flex;align-items:center;justify-content:space-between;text-align:left;flex:1;gap:5px;background:transparent;color:#cbd9dc;border:0;border-radius:7px;padding:5px 7px;min-width:0;font-size:11px;line-height:1.35;overflow-wrap:anywhere}.tree-link:hover,.tree-link.selected{background:#30515a;color:#fff}.tree-link span{font-size:10px;color:#90aeb6;white-space:nowrap}.hint-dark{font-size:11px;color:#b9d0d2;padding:0 10px}.folder-card{background:#fff;border:1px solid #dde6e5;border-radius:14px;margin:12px 0;overflow:hidden;scroll-margin-top:18px}.folder-card.root-folder{border-color:#cddfdc;box-shadow:var(--shadow)}.folder-head{display:flex;align-items:center;gap:8px;padding:2px 8px 2px 2px;background:#fafcfc}.folder-heading-button{display:flex;align-items:center;gap:10px;flex:1;text-align:left;background:transparent;border:0;padding:13px 12px;color:var(--ink);min-width:0}.folder-heading-button:hover{background:#f2f7f6;border-radius:11px}.folder-chevron{color:#6c8a8d;font-size:18px;width:17px;flex:none}.folder-tile{width:29px;height:29px;border-radius:9px;background:#eaf4f1;color:#336b66;display:grid;place-items:center;font-size:15px;flex:none}.folder-main{flex:1;min-width:0}.folder-main strong{display:block;font-size:14px;line-height:1.4;overflow-wrap:anywhere}.folder-desc{display:block;color:#7a898e;font-size:11px;line-height:1.4;margin-top:2px}.folder-stats{font-size:11px;color:#637780;white-space:nowrap;margin-right:12px}.folder-inside{border-top:1px solid #f0f2f3;padding:8px 13px 11px}.folder-ops{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:0 0 8px}.folder-ops .tag{margin-right:auto}.folder-ops .btn{padding:6px 8px}.folder-empty{font-size:11px;color:#88979c;margin:12px 4px}.nested-folders{padding-left:13px;margin-top:10px;border-left:2px solid #e4eded}.nested-folders .folder-card{margin:7px 0}.nested-folders .folder-heading-button{padding:9px}.nested-folders .folder-main strong{font-size:13px}.nested-folders .folder-inside{padding-left:9px;padding-right:9px}.tree-toolbar{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin:-5px 0 14px}.lesson-list{padding:0}.lesson-row{padding:10px 7px;gap:9px}.lesson-side .a-link{white-space:nowrap}.resource-cover{display:grid;place-items:center;background:#eef5f4;border-radius:12px;min-height:90px;color:#647b7b;font-size:12px;text-align:center}.embed-shell iframe{width:100%;aspect-ratio:16/9;border:0;border-radius:10px}.embed-placeholder{display:grid;place-items:center;text-align:center;gap:9px;min-height:190px}.embed-placeholder span{font-size:12px;color:#819198}.detail-edit{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}.detail-edit>span{font-size:11px;color:#718089;overflow-wrap:anywhere}.detail-actions{display:flex;gap:8px;flex-wrap:wrap}.field-hint{font-size:11px;color:#7a8c91}.dialog-body .field textarea{width:100%}.dialog-body .field label{display:block}.folder-ops button:focus-visible{z-index:3}.crumb{display:flex;align-items:center;gap:9px}.folder-card .lesson-tags{margin-top:5px}
+@media(max-width:900px){.folder-ops .btn{font-size:10px}.folder-nav{max-height:34vh}}
+@media(max-width:640px){.nested-folders{padding-left:7px}.folder-inside{padding:6px}.folder-head{gap:1px}.folder-heading-button{padding:9px 5px}.folder-tile{display:none}.folder-stats{margin-right:4px}.lesson-side{flex-wrap:wrap;justify-content:flex-end}.lesson-number{display:none}.folder-ops .tag{margin-right:0}.tree-toolbar .btn{padding:7px}.lesson-row{gap:5px}.lesson-main{min-width:110px}}
+</style></head>
+<body><div class="app"><aside class="sidebar" id="sidebar" aria-label="Study navigation"></aside><div class="sidebar-backdrop" id="sidebarBackdrop"></div><main id="main" class="main" tabindex="-1"></main></div><dialog id="editDialog" aria-label="Edit library item"></dialog><dialog id="lessonDialog" aria-label="Lesson details"></dialog><input id="importFile" type="file" accept=".json,application/json" hidden><div class="save-notice" id="toast" role="status" aria-live="polite"></div><script type="application/json" id="seed-data">{
+  "schemaVersion": 2,
+  "courses": [
+    {
+      "id": "course-physiology",
+      "name": "Physiology",
+      "description": "A modular physiology study library. Start with Cell Membrane Physiology; add further topics and courses as needed.",
+      "driveUrl": "https://drive.google.com/drive/folders/19xp9FzynTVSh0VEfW3zQhU-WR5mLqUxM",
+      "folders": [
+        {
+          "id": "folder-cell-membrane",
+          "title": "Cell Membrane Physiology",
+          "goal": "Cell structure, membrane transport, and electrical excitability.",
+          "level": "core",
+          "folders": [
+            {
+              "id": "folder-structure",
+              "title": "Membrane structure & proteins",
+              "goal": "Phospholipid bilayer, selective permeability and membrane proteins.",
+              "level": "core",
+              "folders": [],
+              "resources": [
+                {
+                  "id": "r001",
+                  "title": "Cell Membrane | Cell: The Unit of Life (overview)",
+                  "url": "https://www.youtube.com/watch?v=Rwa8ynMf5WM",
+                  "description": "Overview of membrane architecture and selective transport.",
+                  "type": "video",
+                  "provider": "Khan Academy",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "r002",
+                  "title": "Fluid mosaic model of cell membranes",
+                  "url": "https://www.youtube.com/watch?v=cP8iQu57dQo",
+                  "description": "Phospholipids, cholesterol, glycolipids and proteins.",
+                  "type": "video",
+                  "provider": "Khan Academy",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "r003",
+                  "title": "Cell membrane overview and fluid mosaic model (MCAT)",
+                  "url": "https://www.youtube.com/watch?v=LXaPt9i9hqk",
+                  "description": "Medical-track review of the membrane model.",
+                  "type": "video",
+                  "provider": "Khan Academy",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "r004",
+                  "title": "Cell membrane introduction",
+                  "url": "https://www.youtube.com/watch?v=QpcACa39YtA",
+                  "description": "Why the lipid bilayer is selectively permeable.",
+                  "type": "video",
+                  "provider": "Khan Academy",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "r005",
+                  "title": "Cell membrane proteins",
+                  "url": "https://www.khanacademy.org/science/ap-biology/cell-structure-and-function/plasma-membranes/v/cell-membrane-proteins",
+                  "description": "Integral and peripheral proteins, channels and carriers.",
+                  "type": "video",
+                  "provider": "Khan Academy",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "r006",
+                  "title": "Ligand-gated ion channels",
+                  "url": "https://www.youtube.com/watch?v=Pl7nzXaVqak",
+                  "description": "How ligand binding controls an ion channel.",
+                  "type": "video",
+                  "provider": "Khan Academy",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                }
+              ]
+            },
+            {
+              "id": "folder-transport",
+              "title": "Membrane Transport",
+              "goal": "Explore passive, active, vesicular and epithelial transport; follow topics in order.",
+              "level": "core",
+              "folders": [
+                {
+                  "id": "folder-passive",
+                  "title": "Passive transport, osmosis & body fluids",
+                  "goal": "Concentration gradients, diffusion, osmosis and tonicity.",
+                  "level": "core",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r007",
+                      "title": "Diffusion",
+                      "url": "https://www.youtube.com/watch?v=a_Y9wBQ610o",
+                      "description": "Diffusion down a concentration gradient.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r008",
+                      "title": "Facilitated diffusion",
+                      "url": "https://www.khanacademy.org/science/ap-biology/cell-structure-and-function/facilitated-diffusion/v/facilitated-diffusion",
+                      "description": "Channels and carriers; no ATP consumed.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r009",
+                      "title": "Osmosis",
+                      "url": "https://www.youtube.com/watch?v=rCNlG_j_gSM",
+                      "description": "Water movement through selective membranes.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r010",
+                      "title": "Hypotonic, isotonic and hypertonic solutions",
+                      "url": "https://www.youtube.com/watch?v=afWnU10ZNfg",
+                      "description": "Predict cell swelling and shrinking.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r011",
+                      "title": "Diffusion and osmosis (integrated explanation)",
+                      "url": "https://en.khanacademy.org/science/biology/cell-division/v/diffusion-and-osmosis",
+                      "description": "Integrated conceptual review.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r012",
+                      "title": "Molarity, molality, osmolarity, osmolality and tonicity",
+                      "url": "https://www.youtube.com/watch?v=o_Bb43LApog",
+                      "description": "Distinguish related concentration terms.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-fick",
+                  "title": "Fick's law of diffusion",
+                  "goal": "Quantitative driving forces and diffusion flux.",
+                  "level": "advanced",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r029",
+                      "title": "MIT — Diffusion and Fick’s Law",
+                      "url": "https://ocw.mit.edu/courses/res-tll-004-stem-concept-videos-fall-2013/resources/diffusion-and-ficks-law/",
+                      "description": "MIT concept video. Learn J = −D(dC/dx), then apply to membrane diffusion.",
+                      "type": "video",
+                      "provider": "MIT OpenCourseWare",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-active",
+                  "title": "Active transport",
+                  "goal": "Pumps, cotransporters and ion gradients.",
+                  "level": "core",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r013",
+                      "title": "Sodium-potassium pump",
+                      "url": "https://www.youtube.com/watch?v=vh166DKxYiM",
+                      "description": "3 Na⁺ out, 2 K⁺ in, 1 ATP.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r014",
+                      "title": "Electrochemical gradients and secondary active transport",
+                      "url": "https://www.youtube.com/watch?v=wbWL2wfvsM8",
+                      "description": "How downhill ion transport powers uphill solute transport.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r015",
+                      "title": "Uniporters, symporters and antiporters",
+                      "url": "https://www.youtube.com/watch?v=-aGYytZ7K7M",
+                      "description": "Compare carrier transport modes.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-bulk",
+                  "title": "Bulk / vesicular transport",
+                  "goal": "Endocytosis, exocytosis and vesicle trafficking.",
+                  "level": "core",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r016",
+                      "title": "Endocytosis, phagocytosis and pinocytosis",
+                      "url": "https://www.youtube.com/watch?v=QspmZf_yWyU",
+                      "description": "Cell uptake of particles and fluid.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r017",
+                      "title": "Exocytosis",
+                      "url": "https://www.youtube.com/watch?v=VOzV4d0HKis",
+                      "description": "Fusion of vesicles with the plasma membrane.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-epithelial",
+                  "title": "Epithelial transport",
+                  "goal": "Applied transepithelial solute transport.",
+                  "level": "advanced",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r036",
+                      "title": "OpenStax — Tubular reabsorption",
+                      "url": "https://openstax.org/books/anatomy-and-physiology-2e/pages/25-6-tubular-reabsorption",
+                      "description": "Apply coupled transport to kidney epithelium.",
+                      "type": "article",
+                      "provider": "OpenStax",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                }
+              ],
+              "resources": []
+            },
+            {
+              "id": "folder-electrical",
+              "title": "Membrane Potential & Electrophysiology",
+              "goal": "Connect ion gradients and permeability to excitability.",
+              "level": "core",
+              "folders": [
+                {
+                  "id": "folder-resting",
+                  "title": "Resting membrane potential",
+                  "goal": "Ionic driving force and selective membrane permeability.",
+                  "level": "core",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r018",
+                      "title": "Membrane potentials — Part 1",
+                      "url": "https://www.youtube.com/watch?v=PtKAeihnbv0",
+                      "description": "Ionic permeability and charge separation.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r019",
+                      "title": "Neuron resting potential description",
+                      "url": "https://www.khanacademy.org/science/health-and-medicine/nervous-system-and-sensory-infor/neuron-membrane-potentials-topic/v/neuron-resting-potential-description",
+                      "description": "Electrical and chemical forces.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r020",
+                      "title": "Neuron resting potential mechanism",
+                      "url": "https://www.youtube.com/watch?v=l3ngsl7FhTc",
+                      "description": "K⁺ leak and the Na⁺/K⁺ pump.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r021",
+                      "title": "Permeability and membrane potentials",
+                      "url": "https://www.khanacademy.org/science/health-and-medicine/circulatory-system/heart-depolarization/v/permeability-and-membrane-potentials",
+                      "description": "Why high-permeability ions weigh more strongly in Vm.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r022",
+                      "title": "The membrane potential (illustrated article)",
+                      "url": "https://www.khanacademy.org/science/biology/human-biology/neuron-nervous-system/a/the-membrane-potential",
+                      "description": "A diagram-rich article reviewing membrane potential.",
+                      "type": "article",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-nernst",
+                  "title": "Nernst equation",
+                  "goal": "Single-ion equilibrium potential and electrochemical driving forces.",
+                  "level": "advanced",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r030",
+                      "title": "PhysiologyWeb — Nernst equation calculator",
+                      "url": "https://www.physiologyweb.com/calculators/nernst_equation_calculator.html",
+                      "description": "Change ion concentration and valence; compare calculated equilibrium potentials.",
+                      "type": "calculator",
+                      "provider": "PhysiologyWeb",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r031",
+                      "title": "MIT 9.40 — Lectures 2–3 (RC circuit and Nernst potential)",
+                      "url": "https://ocw.mit.edu/courses/9-40-introduction-to-neural-computation-spring-2018/resources/lecture-videos/",
+                      "description": "MIT university lectures; navigate to lectures 2 and 3.",
+                      "type": "course",
+                      "provider": "MIT OpenCourseWare",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-ghk",
+                  "title": "Goldman–Hodgkin–Katz equation",
+                  "goal": "Membrane potential under multiple permeable ions.",
+                  "level": "advanced",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r032",
+                      "title": "PhysiologyWeb — GHK equation calculator",
+                      "url": "https://www.physiologyweb.com/calculators/ghk_equation_calculator.html",
+                      "description": "Explore how changing ionic permeabilities changes Vm.",
+                      "type": "calculator",
+                      "provider": "PhysiologyWeb",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-rc",
+                  "title": "Membrane capacitance & resistance",
+                  "goal": "RC circuits, time constant and voltage responses.",
+                  "level": "advanced",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r033",
+                      "title": "MIT 9.40 — Lecture 2: RC circuit and Nernst potential",
+                      "url": "https://ocw.mit.edu/courses/9-40-introduction-to-neural-computation-spring-2018/video_galleries/lecture-videos/",
+                      "description": "MIT lecture collection; navigate to lecture 2.",
+                      "type": "course",
+                      "provider": "MIT OpenCourseWare",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r034",
+                      "title": "Neuroscience Online — Membrane potential",
+                      "url": "https://nba.uth.tmc.edu/neuroscience/s1/chapter03.html",
+                      "description": "Complementary illustrated reading on membrane electricity.",
+                      "type": "article",
+                      "provider": "UTHealth",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-action",
+                  "title": "Graded & action potentials",
+                  "goal": "Channels, phases, refractory periods and propagation.",
+                  "level": "core",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r023",
+                      "title": "Neuron graded potential description",
+                      "url": "https://www.khanacademy.org/science/health-and-medicine/nervous-system-and-sensory-infor/neuron-membrane-potentials-topic/v/neuron-graded-potential-description",
+                      "description": "Graded excitation and inhibition.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r024",
+                      "title": "Electrotonic and action potentials",
+                      "url": "https://www.khanacademy.org/science/health-and-medicine/nervous-system-and-sensory-infor/neuron-membrane-potentials-topic/v/electrotonic-action-potential",
+                      "description": "Passive spread versus active regeneration.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r025",
+                      "title": "Neuron action potential description",
+                      "url": "https://www.khanacademy.org/v/neuron-action-potential-description",
+                      "description": "Phases and properties of action potentials.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r026",
+                      "title": "Neuron action potential mechanism",
+                      "url": "https://en.khanacademy.org/science/health-and-medicine/nervous-system-and-sensory-infor/neuron-membrane-potentials-topic/v/neuron-action-potential-mechanism",
+                      "description": "Voltage-gated Na⁺/K⁺ channels and refractory periods.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r027",
+                      "title": "Saltatory conduction in neurons",
+                      "url": "https://www.youtube.com/watch?v=ikFUv-gdNLQ",
+                      "description": "Myelin and nodes of Ranvier.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    },
+                    {
+                      "id": "r028",
+                      "title": "Action potential patterns (optional)",
+                      "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/neuron-membrane-potentials/v/action-potential-patterns",
+                      "description": "How neurons encode information in firing patterns.",
+                      "type": "video",
+                      "provider": "Khan Academy",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                },
+                {
+                  "id": "folder-model",
+                  "title": "Electrophysiology models",
+                  "goal": "Integrate-and-fire and Hodgkin–Huxley models.",
+                  "level": "advanced",
+                  "folders": [],
+                  "resources": [
+                    {
+                      "id": "r035",
+                      "title": "MIT 9.40 — Lectures 3–5 (spike models)",
+                      "url": "https://ocw.mit.edu/courses/9-40-introduction-to-neural-computation-spring-2018/video_galleries/lecture-videos/",
+                      "description": "Go beyond qualitative action potentials into computational models.",
+                      "type": "course",
+                      "provider": "MIT OpenCourseWare",
+                      "done": false,
+                      "star": false,
+                      "notes": ""
+                    }
+                  ]
+                }
+              ],
+              "resources": []
+            }
+          ],
+          "resources": []
+        }
+      ]
+    }
+  ]
+}</script><script>(()=>{
+'use strict';
+const SEED=JSON.parse(document.getElementById('seed-data').textContent);
+const KEY='study-hub-tree-library-v2', LEGACY_KEY='molecular-physiology-study-hub-v1', FOLD_KEY='study-hub-tree-folded-v2';
+const el={side:document.getElementById('sidebar'),main:document.getElementById('main'),edit:document.getElementById('editDialog'),detail:document.getElementById('lessonDialog'),toast:document.getElementById('toast'),importer:document.getElementById('importFile')};
+const clone=x=>JSON.parse(JSON.stringify(x));
+const h=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid=(prefix='x')=>prefix+'-'+Date.now().toString(36)+'-'+Math.random().toString(36).slice(2,8);
+const urlOk=x=>{try{const u=new URL(String(x));return ['http:','https:'].includes(u.protocol)?u.href:''}catch(e){return ''}};
+const icon=(type)=>({folder:'▸',down:'⌄',video:'▶',book:'◫',link:'↗',move:'↕',star:'☆',check:'✓',notes:'✎'}[type]||'•');
+const children=f=>Array.isArray(f.folders)?f.folders:[];
+const items=f=>Array.isArray(f.resources)?f.resources:[];
+let storeAvailable=true;
+function toV2(raw){
+ if(!raw||!Array.isArray(raw.courses))throw Error('The backup has no courses');
+ if(raw.courses.every(c=>Array.isArray(c.folders))){return {schemaVersion:2,courses:raw.courses.map(c=>({...c,folders:c.folders}))}}
+ if(!raw.courses.every(c=>Array.isArray(c.sections)))throw Error('Unsupported backup structure');
+ const upgraded=raw.courses.map(c=>{
+  const sections=c.sections.map(s=>({id:s.id||uid('f'),title:s.title,goal:s.goal||'',level:s.level||'core',folders:[],resources:clone(s.resources||[])}));
+  const isMembrane=/^cell membrane physiology$/i.test(c.name||'');
+  if(isMembrane){
+   const membrane=clone(SEED.courses[0].folders[0]);
+   const targets={s01:'folder-structure',s02:'folder-passive',s03:'folder-active',s04:'folder-bulk',s05:'folder-resting',s06:'folder-action',s07:'folder-fick',s08:'folder-nernst',s09:'folder-ghk',s10:'folder-rc',s11:'folder-model',s12:'folder-epithelial'};
+   const lookup={};(function index(n){lookup[n.id]=n;n.resources=[];n.folders.forEach(index)})(membrane);
+   for(const sec of c.sections){
+    const target=lookup[targets[sec.id]];
+    if(target){target.resources=clone(sec.resources||[]); if(sec.goal)target.goal=sec.goal;}
+    else membrane.folders.push({id:sec.id||uid('f'),title:sec.title||'Imported topic',goal:sec.goal||'',level:sec.level||'core',resources:clone(sec.resources||[]),folders:[]});
+   }
+   return {id:'course-physiology',name:'Physiology',description:c.description||'Your imported physiology study materials',driveUrl:'https://drive.google.com/drive/folders/19xp9FzynTVSh0VEfW3zQhU-WR5mLqUxM',folders:[membrane]};
+  }
+  return {id:c.id||uid('c'),name:c.name,description:c.description||'',driveUrl:c.driveUrl||'',folders:sections};
+ });
+ const out=[];for(const course of upgraded){const duplicate=out.find(x=>x.id===course.id);if(duplicate)duplicate.folders.push(...course.folders);else out.push(course)}
+ return {schemaVersion:2,courses:out};
+}
+function validate(x){
+ if(!x||!Array.isArray(x.courses)||x.courses.length>300)return false;
+ let nodes=0;const ids=new Set();
+ function walk(list,depth=0){if(depth>16||!Array.isArray(list))return false;for(const f of list){nodes++;if(nodes>15000||!f||typeof f.title!=='string'||!Array.isArray(f.folders)||!Array.isArray(f.resources)||ids.has(f.id))return false;ids.add(f.id);for(const r of f.resources){nodes++;if(nodes>15000||!r||typeof r.title!=='string'||typeof r.url!=='string'||!urlOk(r.url)||ids.has(r.id))return false;ids.add(r.id)}if(!walk(f.folders,depth+1))return false}return true}
+ return x.courses.every(c=>c&&typeof c.name==='string'&&typeof c.id==='string'&&walk(c.folders));
+}
+let data=clone(SEED),cameFromLegacy=false;
+try{const stored=localStorage.getItem(KEY),old=localStorage.getItem(LEGACY_KEY);if(stored){const parsed=toV2(JSON.parse(stored));if(validate(parsed))data=parsed;}else if(old){const parsed=toV2(JSON.parse(old));if(validate(parsed)){data=parsed;cameFromLegacy=true}}}catch(e){storeAvailable=false}
+let collapsed=new Set();try{const saved=JSON.parse(localStorage.getItem(FOLD_KEY)||'null');if(Array.isArray(saved)){collapsed=new Set(saved)}else{for(const c of data.courses)walkFolders(c,(f,parent,depth)=>{if(depth>=2)collapsed.add(f.id)})}}catch(e){}
+let selected=data.courses[0]?.id||null, activeFolder=null, search='', filter='all', kind='all', currentDetail=null, dragging=null;
+function walkFolders(c,cb){function run(nodes,parent=null,depth=0,ancestors=[]){for(const f of nodes){cb(f,parent,depth,ancestors,c);run(children(f),f,depth+1,[...ancestors,f])}}run(c.folders||[])}
+function allResources(c){const acc=[];walkFolders(c,(f)=>acc.push(...items(f)));return acc}
+const stats=a=>({total:a.length,done:a.filter(r=>r.done).length});
+const pct=p=>p.total?Math.round(p.done/p.total*100):0;
+function findCourse(id){return data.courses.find(c=>c.id===id)}
+function folderContext(id){for(const c of data.courses){let result=null;walkFolders(c,(f,parent,depth,ancestors)=>{if(f.id===id)result={c,f,parent,depth,ancestors}});if(result)return result}return null}
+function itemContext(id){for(const c of data.courses){let result=null;walkFolders(c,(f)=>{const r=items(f).find(x=>x.id===id);if(r)result={c,f,r}});if(result)return result}return null}
+function descIds(f){const out=[f.id];(function dive(n){for(const ch of children(n)){out.push(ch.id);dive(ch)}})(f);return out}
+function resourceProvider(url){try{const host=new URL(url).hostname.replace(/^www\./,'');if(host==='youtube.com'||host==='youtu.be')return 'YouTube';if(host.includes('khanacademy.org'))return 'Khan Academy';if(host.includes('mit.edu'))return 'MIT OpenCourseWare';return host}catch(e){return 'Custom'}}
+function guessTitle(url){try{const x=new URL(url);if(x.hostname==='youtu.be'||x.hostname.endsWith('youtube.com'))return 'YouTube video '+(x.searchParams.get('v')||x.pathname.split('/').filter(Boolean).pop()||'');let name=decodeURIComponent(x.pathname.split('/').filter(Boolean).pop()||'Learning resource').replace(/[-_]/g,' ');return name.slice(0,90)}catch(e){return 'Untitled resource'}}
+function youtubeId(url){try{const x=new URL(url);if(x.hostname==='youtu.be')return x.pathname.slice(1).split('/')[0];if(x.hostname.endsWith('youtube.com'))return x.pathname==='/watch'?x.searchParams.get('v'):x.pathname.match(/^\/(?:embed|shorts|live)\/([\w-]{11})/)?.[1]}catch(e){}return null}
+function persist(){try{localStorage.setItem(KEY,JSON.stringify(data));localStorage.setItem(FOLD_KEY,JSON.stringify([...collapsed]));storeAvailable=true}catch(e){storeAvailable=false;notify('Cannot save in this browser. Export a backup.',true)}}
+if(cameFromLegacy)persist();
+function notify(msg,error=false){el.toast.textContent=msg;el.toast.className='save-notice show'+(error?' toast-error':'');clearTimeout(notify.timer);notify.timer=setTimeout(()=>el.toast.className='save-notice',3000)}
+const pill=(label,level='')=>`<span class="tag ${level==='advanced'?'advanced':''}">${h(label)}</span>`;
+const smallBtn=(label,action,id,attrs='')=>`<button type="button" class="btn sm subtle" data-action="${action}" data-id="${h(id)}" ${attrs}>${label}</button>`;
+function sidebarTree(f,depth=0){const p=stats(getNestedResources(f));const folded=collapsed.has(f.id);const current=activeFolder===f.id;
+ return `<div class="tree-item" style="--depth:${depth}"><button class="tree-caret" data-action="toggle-folder" data-id="${h(f.id)}" aria-label="${folded?'Expand':'Collapse'} ${h(f.title)}" title="${folded?'Expand':'Collapse'}">${folded?'▸':'▾'}</button><button class="tree-link ${current?'selected':''}" data-action="jump-folder" data-id="${h(f.id)}" title="${h(f.title)}">${h(f.title)} <span>${p.done}/${p.total}</span></button></div>${folded?'':children(f).map(x=>sidebarTree(x,depth+1)).join('')}`;
+}
+function getNestedResources(f){return [...items(f),...children(f).flatMap(getNestedResources)]}
+function renderSidebar(){const c=findCourse(selected);el.side.innerHTML=`<div class="brand"><div class="brand-mark">S</div><div><div class="brand-title">Study Hub</div><div class="brand-sub">YOUR PERSONAL COURSE LIBRARY</div></div></div>
+<div class="side-label">Courses</div><nav class="course-nav">${data.courses.map(course=>{const p=stats(allResources(course));return `<button class="nav-entry ${course.id===selected?'active':''}" data-action="select-course" data-id="${h(course.id)}"><span class="nav-circle">◫</span><span class="course-side-name"><strong>${h(course.name)}</strong><small>${p.done}/${p.total} completed</small></span></button>`}).join('')||'<p class="hint-dark">No courses yet</p>'}</nav>
+<button class="side-secondary" data-action="new-course">＋ Add course</button>
+${c?`<div class="side-label">${h(c.name)} · Folders</div><nav class="folder-nav">${c.folders.map(f=>sidebarTree(f)).join('')||'<p class="hint-dark">Add your first topic folder</p>'}</nav><button class="side-secondary" data-action="new-folder" data-parent="root">＋ Add folder in ${h(c.name)}</button>`:''}
+<div class="side-label">Data & Backup</div><div class="side-actions"><button class="side-secondary" data-action="export">⇩ Export JSON backup</button><button class="side-secondary" data-action="import">⇧ Import JSON backup</button><button class="side-secondary" data-action="reset">↺ Reset starter library</button></div>
+<div class="side-links">Your data stays in this browser. Keep a JSON backup, especially if you move the HTML file.<a href="https://drive.google.com/drive/folders/19xp9FzynTVSh0VEfW3zQhU-WR5mLqUxM" target="_blank" rel="noopener noreferrer">Open Molecular Physiology Drive ↗</a>${c?.driveUrl?`<a href="${h(urlOk(c.driveUrl))}" target="_blank" rel="noopener noreferrer">Course Drive ↗</a>`:''}</div>`;}
+function resourceMatches(r,f,folderMatch=false){const q=search.toLowerCase().trim();if(q&&!folderMatch&&![r.title,r.description,r.provider,r.type,r.notes,f.title,f.goal].some(v=>String(v||'').toLowerCase().includes(q)))return false;if(filter==='todo'&&r.done)return false;if(filter==='done'&&!r.done)return false;if(filter==='star'&&!r.star)return false;if(kind!=='all'&&r.type!==kind)return false;return true}
+const filtersOn=()=>Boolean(search.trim()||filter!=='all'||kind!=='all');
+function folderResult(f,inheritedMatch=false){const folderMatch=inheritedMatch||Boolean(search.trim()&&[f.title,f.goal].some(v=>String(v||'').toLowerCase().includes(search.trim().toLowerCase())));const own=items(f).filter(r=>resourceMatches(r,f,folderMatch));const kids=children(f).map(x=>folderResult(x,folderMatch)).filter(x=>x.show);return {f,own,kids,show:!filtersOn()||own.length>0||kids.length>0};}
+function lessonRow(r,n,f){return `<div class="lesson-row ${r.done?'completed':''}" draggable="true" data-resource="${h(r.id)}" data-folder="${h(f.id)}"><button class="check ${r.done?'checked':''}" data-action="toggle-done" data-id="${h(r.id)}" title="${r.done?'Mark incomplete':'Mark completed'}" aria-label="${r.done?'Mark incomplete':'Mark complete'}: ${h(r.title)}">${r.done?'✓':''}</button><span class="lesson-number">${String(n).padStart(2,'0')}</span><div class="lesson-main"><button class="lesson-title" data-action="detail" data-id="${h(r.id)}">${h(r.title)}</button><div class="lesson-description">${h(r.description||'')}</div><div class="lesson-tags"><span>${h(r.provider||'Custom')}</span><span>${h(r.type||'resource')}</span>${r.notes?.trim()?'<span>Notes saved</span>':''}</div></div><div class="lesson-side"><button class="tinybtn ${r.star?'star-on':''}" data-action="toggle-star" data-id="${h(r.id)}" aria-label="Toggle bookmark">${r.star?'★':'☆'}</button><button class="tinybtn reorder" data-action="move-resource" data-id="${h(r.id)}" data-step="-1" title="Move video up" aria-label="Move up">↑</button><button class="tinybtn reorder" data-action="move-resource" data-id="${h(r.id)}" data-step="1" title="Move video down" aria-label="Move down">↓</button><a class="a-link" href="${h(urlOk(r.url))}" target="_blank" rel="noopener noreferrer" aria-label="Open ${h(r.title)}">Open ↗</a></div></div>`}
+function folderView(record,depth=0){const f=record.f,collapsedHere=collapsed.has(f.id)&&!filtersOn(), p=stats(getNestedResources(f));return `<section class="folder-card ${depth===0?'root-folder':''}" id="folder-${h(f.id)}" style="--nest:${Math.min(depth,5)}"><div class="folder-head"><button class="folder-heading-button" data-action="toggle-folder" data-id="${h(f.id)}" aria-expanded="${!collapsedHere}"><span class="folder-chevron">${collapsedHere?'▸':'▾'}</span><span class="folder-tile">${depth===0?'◫':'▤'}</span><span class="folder-main"><strong>${h(f.title)}</strong><span class="folder-desc">${h(f.goal||'Add videos, notes or more folders here.')}</span></span></button><span class="folder-stats">${p.done}/${p.total}</span></div>
+${collapsedHere?'':`<div class="folder-inside"><div class="folder-ops">${pill(f.level==='advanced'?'Advanced':'Core')}${smallBtn('＋ Subfolder','new-folder',f.id,`data-parent="${h(f.id)}"`)}${smallBtn('＋ Video / link','new-resource','',`data-folder="${h(f.id)}"`)}${smallBtn('↑','move-folder',f.id,'data-step="-1" title="Move folder up"')}${smallBtn('↓','move-folder',f.id,'data-step="1" title="Move folder down"')}${smallBtn('✎','edit-folder',f.id,'title="Rename or move folder"')}${smallBtn('✕','delete-folder',f.id,'title="Delete folder"')}</div>${record.own.length?`<div class="lesson-list">${record.own.map((r,i)=>lessonRow(r,i+1,f)).join('')}</div>`:''}${record.kids.length?`<div class="nested-folders">${record.kids.map(k=>folderView(k,depth+1)).join('')}</div>`:''}${!record.own.length&&!record.kids.length?'<p class="folder-empty">No videos in this folder yet. Add a link or create a subfolder.</p>':''}</div>`}</section>`}
+function nextResource(c){for(const r of allResources(c)){if(!r.done)return r}return allResources(c)[0]||null}
+function renderMain(){const c=findCourse(selected),p=c?stats(allResources(c)):{total:0,done:0},global=data.courses.flatMap(allResources),starred=global.filter(r=>r.star).length;const next=c?nextResource(c):null;
+el.main.innerHTML=`<div class="header-top"><div class="crumb"><button class="btn sm iconbtn mobile-menu" data-action="toggle-sidebar" aria-label="Open navigation">☰</button> Study Hub / ${h(c?.name||'Your courses')}</div><div class="status-pill"><i style="background:${storeAvailable?'#6c9c86':'#d3a25f'}"></i>${storeAvailable?'Offline library':'Export backup to save'}</div></div>
+<div class="hero"><span class="eyebrow">YOUR LEARNING WORKSPACE</span><h1>${h(c?.name||'Study Hub')}</h1><p>${h(c?.description||'Create courses, organize topics into nested folders, and collect your lecture videos in the right study order.')}</p><div class="hero-bottom">${next?`<button class="btn primary" data-action="detail" data-id="${h(next.id)}">▶ Continue learning</button>`:''}<button class="btn" data-action="new-folder" data-parent="root">＋ Add topic folder</button><button class="btn" data-action="new-resource">＋ Add video / link</button>${c?`<button class="btn subtle" data-action="edit-course" data-id="${h(c.id)}">Edit course</button><button class="btn subtle" data-action="delete-course" data-id="${h(c.id)}" title="Delete course">Delete course</button>`:''}</div></div>
+<div class="stats">${statCard(pct(p)+'%','Course progress',pct(p))}${statCard(p.done,'Lessons completed')}${statCard(c?countFolders(c):0,'Folders & topics')}${statCard(starred,'Saved bookmarks')}</div>
+<div class="controls"><div class="title-block"><h2>Course learning tree</h2><p>Course → Topic → Subtopic → Videos. Expand, collapse, add, move or rename anything.</p></div><div class="toolbar"><label class="searchbox">⌕ <input type="search" id="search" placeholder="Find a topic or lecture…" value="${h(search)}" aria-label="Search all lessons"></label><select id="statusFilter" aria-label="Progress filter"><option value="all" ${filter==='all'?'selected':''}>All progress</option><option value="todo" ${filter==='todo'?'selected':''}>Not started</option><option value="done" ${filter==='done'?'selected':''}>Completed</option><option value="star" ${filter==='star'?'selected':''}>Bookmarked</option></select><select id="typeFilter" aria-label="Format filter"><option value="all" ${kind==='all'?'selected':''}>All formats</option>${['video','course','article','calculator','other'].map(t=>`<option value="${t}" ${kind===t?'selected':''}>${t}</option>`).join('')}</select></div></div>
+<div class="tree-toolbar"><button class="btn sm" data-action="expand-all">▾ Expand all folders</button><button class="btn sm" data-action="collapse-all">▸ Collapse all folders</button><button class="btn sm" data-action="move-course" data-id="${h(c?.id||'')}" data-step="-1">↑ Move course</button><button class="btn sm" data-action="move-course" data-id="${h(c?.id||'')}" data-step="1">↓ Move course</button></div>
+<div id="courseTree">${c?(c.folders.map(f=>folderResult(f)).filter(x=>x.show).map(x=>folderView(x)).join('')||'<div class="empty"><strong>No matching lessons</strong>Try another search or filter.</div>'):'<div class="empty"><strong>Start by adding a course</strong><button class="btn" data-action="new-course">＋ Add course</button></div>'}${c&&!c.folders.length?'<div class="empty"><strong>Course has no folders yet</strong><p>Create a topic (e.g. Cell Membrane Physiology), then a subtopic (e.g. Membrane Transport).</p><button class="btn primary" data-action="new-folder" data-parent="root">＋ Create first topic</button></div>':''}</div>
+<div class="footer">Study Hub 2.0 · Offline-first · Links open their original publisher's website · Progress and notes saved in this browser, not auto-synced to Drive · Export JSON backups regularly.</div>`;
+}
+function statCard(num,label,percent){return `<div class="stat"><div class="stat-num">${num}</div><div class="stat-label">${label}</div>${percent!==undefined?`<div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div>`:''}</div>`}
+function countFolders(c){let n=0;walkFolders(c,()=>n++);return n}
+function render(){if(!findCourse(selected)&&data.courses.length)selected=data.courses[0].id;renderSidebar();renderMain()}
+function updated(msg){persist();render();notify(msg)}
+function openDialog(which,content){const d=which==='detail'?el.detail:el.edit;d.innerHTML=content;d.showModal();d.querySelector('input:not([type=hidden]),select,textarea')?.focus();}
+function closeDialog(d){if(!d||!d.open)return;d.querySelectorAll('iframe').forEach(f=>f.src='about:blank');d.close();if(d===el.detail)currentDetail=null}
+function shell(title,subtitle,body){return `<div class="dialog-top"><div><h2>${h(title)}</h2><small>${h(subtitle)}</small></div><button class="x" data-action="close-dialog" aria-label="Close">✕</button></div><div class="dialog-body">${body}</div>`}
+function fld(name,label,value='',type='text',attrs=''){return `<div class="field"><label for="field-${name}">${h(label)}</label>${type==='textarea'?`<textarea id="field-${name}" name="${h(name)}" ${attrs}>${h(value)}</textarea>`:`<input id="field-${name}" name="${h(name)}" type="${type}" value="${h(value)}" ${attrs}>`}</div>`}
+function formEnd(text='Save changes'){return `<div class="form-error" id="formError" role="alert"></div><div class="dialog-footer"><button type="button" class="btn" data-action="close-dialog">Cancel</button><button class="btn primary" type="submit">${text}</button></div>`}
+function editCourse(id){const c=id?findCourse(id):null;openDialog('edit',shell(c?'Edit course':'Create a course','Top-level courses can each contain as many nested folders as you need.',`<form id="editorForm" data-kind="course" data-id="${h(id||'')}">${fld('name','Course name',c?.name||'','text','required maxlength="120" placeholder="e.g. Physiology"')}${fld('description','Description',c?.description||'','textarea')}${fld('driveUrl','Google Drive URL (optional)',c?.driveUrl||'','url')}${formEnd(c?'Save course':'Create course')}</form>`))}
+function folderOptions(c,excluded=[],selectedValue='root'){const a=[`<option value="root" ${selectedValue==='root'?'selected':''}>${h(c.name)} (course root)</option>`];walkFolders(c,(f,parent,depth)=>{if(excluded.includes(f.id))return;a.push(`<option value="${h(f.id)}" ${f.id===selectedValue?'selected':''}>${'— '.repeat(depth+1)}${h(f.title)}</option>`)});return a.join('')}
+function editFolder(id,parentId='root'){const x=id?folderContext(id):null,c=x?.c||findCourse(selected);if(!c)return notify('Create a course first',true);const parent=x?(x.parent?.id||'root'):parentId;const banned=x?descIds(x.f):[];
+openDialog('edit',shell(x?'Edit / move folder':'New nested folder','Folders can contain videos and more folders. Paste links below to add multiple videos at once.',`<form id="editorForm" data-kind="folder" data-id="${h(id||'')}" data-course="${h(c.id)}">${fld('title','Folder / topic name',x?.f.title||'','text','required maxlength="140" placeholder="e.g. Membrane Transport"')}${fld('goal','Learning objective (optional)',x?.f.goal||'','textarea')}<div class="field"><label>Parent folder</label><select name="parent">${folderOptions(c,banned,parent)}</select></div><div class="field"><label>Level</label><select name="level"><option value="core" ${(x?.f.level||'core')==='core'?'selected':''}>Core</option><option value="advanced" ${x?.f.level==='advanced'?'selected':''}>Advanced</option></select></div>${fld('links','Paste one or multiple video links (optional)','', 'textarea','rows="4" placeholder="https://youtu.be/...&#10;Lecture title | https://www.youtube.com/watch?v=..."')}<div class="field-hint">One video per line. Use “Lecture title | URL” for custom titles. URL-only entries receive editable placeholder titles.</div>${formEnd(x?'Save folder & add links':'Create folder & add links')}</form>`));}
+function folderSelectForCourse(c,selectedId){const choices=[];walkFolders(c,(f,parent,depth)=>choices.push(`<option value="${h(f.id)}" ${f.id===selectedId?'selected':''}>${'— '.repeat(depth)}${h(f.title)}</option>`));return choices.join('')}
+function editResource(id,folderId){const x=id?itemContext(id):null,c=x?.c||findCourse(selected);if(!c)return notify('Create a course first',true);if(!c.folders.length){editFolder(null,'root');notify('Create a folder first');return}const target=x?.f.id||folderId||c.folders[0].id;
+openDialog('edit',shell(x?'Edit resource':'Add video or study link','Paste a YouTube, Khan Academy, MIT or other learning URL.',`<form id="editorForm" data-kind="resource" data-id="${h(id||'')}">${fld('url','Lecture URL',x?.r.url||'','url','required placeholder="https://www.youtube.com/watch?v=..."')}${fld('title','Title',x?.r.title||'','text','placeholder="e.g. Membrane Transport: Facilitated Diffusion" maxlength="180"')}<div class="field"><label>Destination folder</label><select name="folder">${folderSelectForCourse(c,target)}</select></div><div class="field-grid"><div class="field"><label>Format</label><select name="type">${['video','course','article','calculator','other'].map(t=>`<option value="${t}" ${((x?.r.type)||'video')===t?'selected':''}>${t}</option>`).join('')}</select></div>${fld('provider','Provider / channel',x?.r.provider||'','text','placeholder="Khan Academy"')}</div>${fld('description','Brief notes / learning objective',x?.r.description||'','textarea')}${formEnd(x?'Save video':'Add video')}</form>`))}
+function showResource(id){const x=itemContext(id);if(!x)return;currentDetail=id;const r=x.r,yt=youtubeId(r.url),hasVideo=yt&&/^[\w-]{11}$/.test(yt);
+const preview=hasVideo?`<div class="embed-shell" id="embedHere"><div class="embed-placeholder"><strong>Watch the YouTube video in Study Hub</strong><span>Embedded playback needs the internet. Some channels block embedding.</span><button class="btn primary" data-action="embed" data-id="${h(id)}">▶ Play here</button></div></div>`:`<div class="resource-cover">Open the original lesson using the button below.</div>`;
+const body=`<div class="lesson-detail"><div class="detail-meta">${pill(r.provider||'Custom')}${pill(r.type||'resource')}${pill(x.f.title)}</div><p class="detail-desc">${h(r.description||'No description yet.')}</p>${preview}<div class="detail-actions"><a class="btn primary" href="${h(urlOk(r.url))}" target="_blank" rel="noopener noreferrer">Open original resource ↗</a><button class="btn" data-action="toggle-done-detail" data-id="${h(r.id)}">${r.done?'✓ Completed':'○ Mark completed'}</button><button class="btn" data-action="toggle-star-detail" data-id="${h(r.id)}">${r.star?'★ Bookmarked':'☆ Bookmark'}</button></div><div class="field"><label for="noteInput">My study notes</label><textarea id="noteInput" rows="6" placeholder="Key ideas, formulas, questions, experiment notes…">${h(r.notes||'')}</textarea><small>Autosaved locally. Export a JSON backup to protect your notes.</small></div><div class="detail-edit"><span>Location: ${h(x.c.name)} / ${h(x.f.title)}</span><div class="detail-actions"><button class="btn sm" data-action="edit-resource" data-id="${h(id)}">Edit / move</button><button class="btn sm danger" data-action="delete-resource" data-id="${h(id)}">Delete</button></div></div></div>`;
+openDialog('detail',shell(r.title,x.c.name,body));}
+function parseLinks(raw){const list=[];for(const line of raw.split(/\r?\n/).map(x=>x.trim()).filter(Boolean)){let title='',url='';if(line.includes('|')){const bits=line.split('|');title=bits.slice(0,-1).join('|').trim();url=bits.at(-1).trim();}else url=line;const clean=urlOk(url);if(!clean)throw Error('Invalid link: '+line.slice(0,90));list.push({id:uid('r'),title:title||guessTitle(clean),url:clean,description:'',type:'video',provider:resourceProvider(clean),done:false,star:false,notes:''});}if(list.length>200)throw Error('Maximum 200 links at once');return list;}
+function formSubmit(form){const fd=new FormData(form),v=x=>String(fd.get(x)||'').trim(),mode=form.dataset.kind,id=form.dataset.id,err=form.querySelector('#formError');err.textContent='';try{
+if(mode==='course') {if(!v('name'))throw Error('Course name is required');if(v('driveUrl')&&!urlOk(v('driveUrl')))throw Error('Invalid course link');const c=id?findCourse(id):{id:uid('c'),folders:[]};if(!id)data.courses.push(c);Object.assign(c,{name:v('name'),description:v('description'),driveUrl:v('driveUrl')});selected=c.id;}
+if(mode==='folder'){if(!v('title'))throw Error('Folder name is required');const c=findCourse(form.dataset.course),parentId=v('parent'),newResources=parseLinks(v('links'));if(!c)throw Error('Course not found');let f,sourceArray;if(id){const x=folderContext(id);if(!x)throw Error('Folder not found');if(descIds(x.f).includes(parentId))throw Error('A folder cannot be placed inside itself');f=x.f;sourceArray=x.parent?x.parent.folders:x.c.folders;}else f={id:uid('f'),title:'',goal:'',level:'core',folders:[],resources:[]};const target=parentId==='root'?c.folders:folderContext(parentId)?.f.folders;if(!target)throw Error('Destination folder not found');if(id&&sourceArray!==target)sourceArray.splice(sourceArray.indexOf(f),1);if(!id||sourceArray!==target)target.push(f);Object.assign(f,{title:v('title'),goal:v('goal'),level:v('level')});f.resources.push(...newResources);collapsed.delete(f.id);if(parentId!=='root')collapsed.delete(parentId);activeFolder=f.id;}
+if(mode==='resource'){const clean=urlOk(v('url'));if(!clean)throw Error('Enter a full http(s) link');const dst=folderContext(v('folder'));if(!dst)throw Error('Choose a destination folder');const r=id?itemContext(id)?.r:{id:uid('r'),done:false,star:false,notes:''};if(!r)throw Error('Resource not found');if(id){const old=itemContext(id);old.f.resources.splice(old.f.resources.indexOf(r),1)}dst.f.resources.push(r);Object.assign(r,{url:clean,title:v('title')||guessTitle(clean),provider:v('provider')||resourceProvider(clean),type:v('type')||'video',description:v('description')});selected=dst.c.id;activeFolder=dst.f.id;collapsed.delete(dst.f.id);}
+closeDialog(el.edit);updated(mode==='folder'?'Folder and links saved':'Learning library saved');}catch(e){err.textContent=e.message}}
+function mutateOrder(list,obj,step,label){const pos=list.indexOf(obj),next=pos+step;if(pos<0||next<0||next>=list.length)return;[list[pos],list[next]]=[list[next],list[pos]];updated(label+' order updated')}
+function deleteFolder(id){const x=folderContext(id);if(!x)return;const n=getNestedResources(x.f).length;if(!confirm(`Delete folder “${x.f.title}”, ${n} resource(s), all its subfolders and saved notes? This cannot be undone. Export a backup first if needed.`))return;const target=x.parent?x.parent.folders:x.c.folders;target.splice(target.indexOf(x.f),1);updated('Folder deleted')}
+function deleteResource(id){const x=itemContext(id);if(!x)return;if(!confirm(`Delete “${x.r.title}” and its notes?`))return;x.f.resources.splice(x.f.resources.indexOf(x.r),1);closeDialog(el.detail);updated('Resource deleted')}
+function download(name,str){const blob=new Blob([str],{type:'application/json'}),u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),1200)}
+function exportData(){download('Study_Hub_Backup_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify({app:'Study Hub',schemaVersion:2,exportedAt:new Date().toISOString(),library:data,collapsedFolders:[...collapsed]},null,2));notify('JSON backup downloaded')}
+function importData(file){if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const parsed=JSON.parse(reader.result),candidate=toV2(parsed.library||parsed);if(!validate(candidate))throw Error('File does not contain a valid library');if(!confirm('Replace all courses, progress and notes with the selected backup? Export your current backup first.'))return;data=candidate;collapsed=new Set(Array.isArray(parsed.collapsedFolders)?parsed.collapsedFolders:[]);selected=data.courses[0]?.id||null;activeFolder=null;search='';filter='all';kind='all';updated('Backup restored');}catch(e){notify('Import failed: '+e.message,true)}};reader.onerror=()=>notify('Unable to read file',true);reader.readAsText(file)}
+function toggleFolder(id){collapsed.has(id)?collapsed.delete(id):collapsed.add(id);try{localStorage.setItem(FOLD_KEY,JSON.stringify([...collapsed]))}catch(e){}render()}
+function selectFolder(id){const x=folderContext(id);if(!x)return;selected=x.c.id;activeFolder=id;collapsed.delete(id);for(const parent of x.ancestors)collapsed.delete(parent.id);persist();render();document.getElementById('folder-'+id)?.scrollIntoView({behavior:'smooth',block:'start'});el.side.classList.remove('show');document.getElementById('sidebarBackdrop').classList.remove('show')}
+function action(target){const a=target.dataset.action,id=target.dataset.id,step=Number(target.dataset.step||0);if(!a)return;
+switch(a){case 'select-course':selected=id;activeFolder=null;search='';filter='all';kind='all';render();window.scrollTo({top:0,behavior:'smooth'});el.side.classList.remove('show');break;
+case 'jump-folder':selectFolder(id);break;case 'toggle-folder':toggleFolder(id);break;
+case 'toggle-sidebar':el.side.classList.toggle('show');document.getElementById('sidebarBackdrop').classList.toggle('show');break;
+case 'new-course':editCourse(null);break;case 'edit-course':editCourse(id);break;
+case 'delete-course':{const c=findCourse(id);if(c&&confirm(`Delete the entire course “${c.name}”, its folders, ${allResources(c).length} resources, notes and progress? Export a backup first. This cannot be undone.`)){data.courses.splice(data.courses.indexOf(c),1);selected=data.courses[0]?.id||null;activeFolder=null;updated('Course deleted')}break;}
+case 'new-folder':editFolder(null,target.dataset.parent||'root');break;case 'edit-folder':editFolder(id);break;case 'new-resource':editResource(null,target.dataset.folder||null);break;case 'edit-resource':closeDialog(el.detail);editResource(id);break;
+case 'toggle-done':case 'toggle-done-detail':{const x=itemContext(id);if(x){x.r.done=!x.r.done;persist();render();if(a.endsWith('detail'))showResource(id)}break}
+case 'toggle-star':case 'toggle-star-detail':{const x=itemContext(id);if(x){x.r.star=!x.r.star;persist();render();if(a.endsWith('detail'))showResource(id)}break}
+case 'detail':showResource(id);break;
+case 'delete-folder':deleteFolder(id);break;case 'delete-resource':deleteResource(id);break;
+case 'move-resource':{const x=itemContext(id);if(x)mutateOrder(x.f.resources,x.r,step,'Video');break}
+case 'move-folder':{const x=folderContext(id);if(x)mutateOrder(x.parent?x.parent.folders:x.c.folders,x.f,step,'Folder');break}
+case 'move-course':{const c=findCourse(id);if(c)mutateOrder(data.courses,c,step,'Course');break}
+case 'expand-all':collapsed.clear();persist();render();break;
+case 'collapse-all':{const c=findCourse(selected);if(c)walkFolders(c,f=>collapsed.add(f.id));persist();render();break}
+case 'export':exportData();break;case 'import':el.importer.click();break;
+case 'reset':if(confirm('Replace all local data with the 36-lesson starter library? This deletes your custom folders, courses, notes, and progress. Export a backup first.')){data=clone(SEED);selected=data.courses[0]?.id||null;collapsed.clear();walkFolders(data.courses[0],(f,p,d)=>{if(d>=2)collapsed.add(f.id)});updated('Starter library restored')}break;
+case 'embed':{const x=itemContext(id),vid=x&&youtubeId(x.r.url),host=el.detail.querySelector('#embedHere');if(!vid||!host)return;host.innerHTML=`<iframe title="${h(x.r.title)}" src="https://www.youtube-nocookie.com/embed/${h(vid)}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`;break}
+case 'close-dialog':closeDialog(target.closest('dialog'));break;
+}}
+function events(){document.addEventListener('click',e=>{const t=e.target.closest('[data-action]');if(t)action(t)});document.getElementById('sidebarBackdrop').addEventListener('click',()=>{el.side.classList.remove('show');e.target.classList.remove('show')});
+for(const d of [el.detail,el.edit])d.addEventListener('click',e=>{if(e.target===d)closeDialog(d)});
+document.addEventListener('submit',e=>{if(e.target.id==='editorForm'){e.preventDefault();formSubmit(e.target)}});
+document.addEventListener('input',e=>{if(e.target.id==='search'){const cursor=e.target.selectionStart;search=e.target.value;render();const s=document.getElementById('search');s.focus();s.setSelectionRange(cursor,cursor)}else if(e.target.id==='noteInput'&&currentDetail){const x=itemContext(currentDetail);if(x){x.r.notes=e.target.value;persist()}}});
+document.addEventListener('change',e=>{if(e.target.id==='statusFilter'){filter=e.target.value;render()}if(e.target.id==='typeFilter'){kind=e.target.value;render()}if(e.target.id==='importFile'){importData(e.target.files?.[0]);e.target.value=''}});
+document.addEventListener('dragstart',e=>{const row=e.target.closest('.lesson-row[data-resource]');if(!row)return;dragging={id:row.dataset.resource,folder:row.dataset.folder};row.classList.add('dragging');if(e.dataTransfer)e.dataTransfer.effectAllowed='move'});
+document.addEventListener('dragend',()=>{dragging=null;document.querySelectorAll('.dragging,.dropmark').forEach(x=>x.classList.remove('dragging','dropmark'))});
+document.addEventListener('dragover',e=>{const row=e.target.closest('.lesson-row[data-resource]');if(!row||!dragging||row.dataset.folder!==dragging.folder)return;e.preventDefault();row.classList.add('dropmark')});
+document.addEventListener('dragleave',e=>{e.target.closest('.lesson-row[data-resource]')?.classList.remove('dropmark')});
+document.addEventListener('drop',e=>{const row=e.target.closest('.lesson-row[data-resource]');if(!row||!dragging||row.dataset.folder!==dragging.folder)return;e.preventDefault();const x=itemContext(dragging.id);if(!x)return;const a=x.f.resources,from=a.findIndex(v=>v.id===dragging.id),to=a.findIndex(v=>v.id===row.dataset.resource);if(from>=0&&to>=0&&from!==to){a.splice(to,0,a.splice(from,1)[0]);updated('Video order updated')}dragging=null})}
+events();render();
+})();
+</script></body></html>
