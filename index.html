@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#2c192c"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Study Hub"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icons/icon.svg"><link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png"><meta name="description" content="Study Hub — organize videos into nested course folders, maintain notes and track progress offline."><title>Study Hub · Course Learning Tree</title><style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#642241"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Study Hub"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icons/icon.svg"><link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png"><meta name="description" content="Study Hub — organize videos into nested course folders, maintain notes and track progress offline."><title>Study Hub · Course Learning Tree</title><style>
   :root{--bg:#f6f7f8;--paper:#fff;--ink:#1e2934;--muted:#66717e;--line:#e4e8ed;--accent:#285a62;--accent-light:#edf5f4;--dark:#152631;--dark2:#223742;--card:#fff;--radius:16px;--shadow:0 8px 32px rgba(30,47,64,.045)}
   *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;color:var(--ink)}
   button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #7ab1b5;outline-offset:3px}
@@ -686,6 +686,100 @@ dialog{background:#242128;color:#fff;border:2px solid #a57e97}
  .sidebar .tree-link{min-height:33px}
  .sidebar .folder-nav .side-lesson{min-height:33px}
 }
+
+
+/* Deep Rose + White + Green toggles: cohesive high-contrast theme */
+:root{color-scheme:dark;--bg:#301126;--paper:#55203e;--card:#55203e;--ink:#fff;--muted:#f8e8f1;--line:#b17e9c;--accent:#b9efd0;--accent-light:#432839;--dark:#642241;--dark2:#4b1935;--rose:#f6c2d9;--rose-light:#873558;--shadow:0 12px 30px #15031038}
+html{background:#301126}
+body{color:#fff;background:linear-gradient(160deg,#301126,#401630 60%,#4b1934)}
+.sidebar{background:linear-gradient(175deg,#642241,#5a1e3b 65%,#471831);color:#fff;border-right:2px solid #ce8daf}
+.sidebar-brand-row,.side-tail{border-color:#bf789e}
+.sidebar .brand-mark{background:#eab0c9;border-color:#ffe1ee;color:#411a31}
+.sidebar .brand-title,.sidebar .brand-sub{color:#fff}
+.sidebar-dismiss{background:#4e1a36;border:1px solid #e6abc9;color:#fff}
+.sidebar-dismiss:hover{background:#742a50;border-color:#fff}
+.side-section-title{color:#fff;font-size:12px;font-weight:800}
+.side-section-count{background:#833455;color:#fff;border:1px solid #e8a6c6}
+.side-mini-action{background:#73304f;color:#fff;border:1px solid #e7abc8;font-weight:750}
+.side-mini-action:hover{background:#913d64;color:#fff;border-color:#fff}
+.sidebar .nav-entry{background:#54203d;border:1px solid #bf829f;color:#fff;box-shadow:0 5px 14px #16041226}
+.sidebar .nav-entry:hover{background:#783052;border-color:#f0c2d8;color:#fff}
+.sidebar .nav-entry.active{background:#873558!important;border:2px solid #ffd7eb!important;color:#fff!important}
+.sidebar .nav-entry strong,.sidebar .nav-entry small,.sidebar .nav-entry.active strong,.sidebar .nav-entry.active small{color:#fff!important}
+.sidebar .nav-entry strong{font-size:14px;font-weight:800}
+.sidebar .nav-entry small{font-size:12px}
+.sidebar .nav-circle{background:#803657;color:#fff}
+.sidebar .nav-entry.active .nav-circle{background:#fff;color:#68213f}
+.course-meter{background:#4f243c}.course-meter span{background:linear-gradient(90deg,#3aac79,#b9efd0)}
+.sidebar .folder-nav{background:#4b1935;border:1px solid #d59ab6;border-radius:15px;max-height:min(57dvh,690px);scrollbar-color:#ba7697 #4b1935}
+.sidebar .tree-item{gap:5px;min-height:38px}
+.sidebar .tree-link,.sidebar .tree-link span:first-child{color:#fff;font-size:13.5px;font-weight:650;line-height:1.45}
+.sidebar .tree-link:hover{background:#773252;color:#fff}
+.sidebar .tree-link.selected{background:#873558!important;color:#fff!important}
+.sidebar .tree-link.selected span:first-child{color:#fff!important}
+.sidebar .tree-link span:last-child{color:#fff;background:#722c4c;border:1px solid #9f6383;font-size:11px;padding:2px 5px}
+.sidebar .tree-link.selected span:last-child{background:#682340;color:#fff}
+.sidebar .tree-item .rename-inline,.course-nav-row>.rename-inline{color:#ffe2ee}
+.sidebar .tree-item .rename-inline:hover,.course-nav-row>.rename-inline:hover{background:#8d3b60;color:#fff}
+.sidebar .folder-nav .side-lesson{color:#fff;font-size:12.5px;line-height:1.5;padding-top:9px;padding-bottom:9px}
+.sidebar .folder-nav .side-lesson::before,.sidebar .folder-nav .side-lesson .side-done{color:#b9efd0}
+.sidebar .folder-nav .side-lesson:hover,.sidebar .folder-nav .side-lesson:focus-visible{background:#813656;color:#fff}
+.sidebar .side-empty,.sidebar .hint-dark{color:#fff}
+.side-device{background:#713052;border:1px solid #d99dbd;color:#fff}
+.side-device:hover{background:#943f65;color:#fff;border-color:#fff}
+.side-footnote{color:#fff}.side-footnote a,.side-device-icon{color:#b9efd0}
+.main{color:#fff}.header-top .crumb,.crumb{color:#fff}
+.nav-open-btn,.library-settings-button{background:#70294c;border:1px solid #e5a6c5;color:#fff}
+.nav-open-btn:hover,.library-settings-button:hover{background:#923d64;color:#fff;border-color:#fff}
+.status-pill{background:#6a2949;border:1px solid #d89db9;color:#fff}
+.hero{background:linear-gradient(125deg,#752b4c,#692743 47%,#4a1a36);border:2px solid #d99bb9}
+.hero h1,.hero p,.eyebrow{color:#fff}
+.btn,.btn.subtle{background:#733052;border:1px solid #b97a9b;color:#fff}
+.btn:hover,.btn:not(.primary):hover,.btn.subtle:hover{background:#8b395d;border:1px solid #f3bbd3;color:#fff}
+.btn.primary{background:#e5aac6;border:1px solid #ffe0ed;color:#32152a}
+.btn.primary:hover{background:#f9cde1;color:#32152a}
+.stat{background:#54203d;border:1px solid #ad7595}
+.stat-num,.stat-label,.title-block h2,.title-block p{color:#fff}
+.progress-track{background:#713b59}.progress-fill{background:linear-gradient(90deg,#299b6a,#9fe7ba)}
+.searchbox,.toolbar .searchbox,.toolbar select{background:#592641;border:1px solid #c28eaa;color:#fff}
+.searchbox input,.toolbar select option{color:#fff}.searchbox input::placeholder{color:#f2d7e4}
+.folder-card,.section-card{background:#55203e;border:1px solid #ba819e}
+.folder-card.root-folder{border:2px solid #d7a0bf}.folder-head{background:#66294b}
+.folder-heading-button,.folder-main strong,.section-name,.folder-desc,.section-goal,.folder-stats,.section-progress{color:#fff}
+.folder-main strong{font-size:15px}.folder-heading-button:hover{background:#793354}
+.folder-tile{background:#853b5d;color:#fff}
+.folder-inside,.section-body{border-top:1px solid #ae7396}
+.nested-folders{border-left:2px solid #d39cb8}
+.folder-rename{background:#803354;color:#fff;border:1px solid #ecc0d5}.folder-rename:hover{background:#9c476a;color:#fff}
+.section-index{background:#863858;border-color:#edbed6;color:#fff}
+.tag,.tag.advanced,.tag.video{background:#763253;border:1px solid #ba819f;color:#fff}
+.lesson-row{border-bottom:1px solid #7e4664}.lesson-row:hover{background:#702d4e;border-color:#e4b5cd}
+.lesson-title{color:#fff;font-size:14px;font-weight:750}.lesson-title:hover{color:#d6f4e0}
+.lesson-row.completed .lesson-title{color:#fff;opacity:.87}
+.lesson-description,.lesson-tags{color:#fff;font-size:12.5px}
+.lesson-number,.tinybtn,.inline-pencil{color:#fff}.tinybtn:hover,.inline-pencil:hover{background:#8e3b60;color:#fff}
+.check{background:#652a49;border:2px solid #e2b6cb;color:#fff}.check.checked{background:#226e4d;border-color:#b7e9ca;color:#fff}
+.a-link,.a-link.watch-action{background:#226e4d!important;border:1px solid #a9e0c0!important;color:#fff!important;font-weight:800}
+.a-link:hover,.a-link.watch-action:hover{background:#185d3f!important;border-color:#fff!important}
+.empty{background:#572540;border:1px dashed #dda6c1;color:#fff}.empty strong{color:#fff}
+dialog{background:#4b1935;border:2px solid #dba2c0;color:#fff}
+.dialog-top,dialog#lessonDialog .dialog-top{background:#642543;border-bottom:1px solid #bc85a4}
+.dialog-top h2,.dialog-top small,.dialog-body,.field label,.notes-content label{color:#fff}
+.dialog-footer{background:#4b1935}
+.field input,.field textarea,.field select,.note-box textarea,.notes-content textarea{background:#3d172e;border:1px solid #e1a5c3;color:#fff}
+.field input::placeholder,.field textarea::placeholder,.notes-content textarea::placeholder{color:#f2dce8}
+.note-box,.tipbox,.lesson-notes-collapse,.lesson-info-collapse{background:#59223f;border:1px solid #c389a8;color:#fff}
+.lesson-notes-collapse summary,.lesson-info-collapse summary{background:#753054;color:#fff}
+.lesson-notes-collapse[open] summary,.lesson-info-collapse[open] summary{background:#87395c;color:#fff}
+.lesson-detail .detail-desc,.detail-edit>span,.detail-player-tip,.notes-content small,.library-tools-note,.library-tools-advanced p,.library-tools-advanced summary{color:#fff}
+.resource-cover{background:#4b1b38;color:#fff}.save-notice{background:#743252;color:#fff}
+.install-guide,.install-guide p,.install-guide li{color:#fff}
+/* Green controls are exclusively the expand / collapse affordances. */
+.sidebar .tree-caret,.side-section-tools .side-mini-action[data-action="expand-all"],.side-section-tools .side-mini-action[data-action="collapse-all"],.tree-toolbar [data-action="expand-all"],.tree-toolbar [data-action="collapse-all"]{background:#226e4d!important;color:#fff!important;border:1px solid #b5e6c9!important;border-radius:9px;min-width:28px;min-height:29px;font-weight:800}
+.sidebar .tree-caret:hover,.side-section-tools .side-mini-action[data-action="expand-all"]:hover,.side-section-tools .side-mini-action[data-action="collapse-all"]:hover,.tree-toolbar [data-action="expand-all"]:hover,.tree-toolbar [data-action="collapse-all"]:hover{background:#185d3f!important;color:#fff!important;border-color:#fff!important}
+.folder-heading-button .folder-chevron{display:grid;place-items:center;flex:0 0 31px;width:31px;height:31px;border-radius:9px;background:#226e4d;color:#fff;border:1px solid #b5e6c9;font-size:20px}
+.folder-heading-button:hover .folder-chevron{background:#185d3f;border-color:#fff}
+@media(max-width:760px){.sidebar .folder-nav{max-height:57dvh}.folder-main strong{font-size:14px}.lesson-title{font-size:14px}.sidebar .tree-link span:first-child{font-size:13px}}
 
 </style></head>
 <body><div class="app"><aside class="sidebar" id="sidebar" aria-label="Study navigation"></aside><div class="sidebar-backdrop" id="sidebarBackdrop"></div><main id="main" class="main" tabindex="-1"></main></div><dialog id="editDialog" aria-label="Edit library item"></dialog><dialog id="lessonDialog" aria-label="Lesson details"></dialog><dialog id="installDialog" aria-label="Install Study Hub"></dialog><input id="importFile" type="file" accept=".json,application/json" hidden><div class="save-notice" id="toast" role="status" aria-live="polite"></div><script type="application/json" id="seed-data">{
