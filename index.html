@@ -68,7 +68,7 @@
 .sidebar > *{flex-shrink:0}
 .sidebar .folder-nav{display:flex!important;flex-direction:column!important;flex:0 0 auto!important;min-height:148px;max-height:min(48dvh,540px);overflow-x:hidden;overflow-y:auto;scrollbar-width:thin;overscroll-behavior:contain;border:1px solid #34515b;border-radius:11px;padding:8px 5px;background:#192e38}
 .sidebar .tree-item{flex-shrink:0}
-.sidebar .tree-link{flex:1;min-width:0;white-space:normal}
+.sidebar .tree-link{flex:1;min-width:0;white-space:normal}.sidebar .tree-link span:first-child{color:inherit;white-space:normal;font-size:11px;overflow-wrap:anywhere;min-width:0;flex:1}.sidebar .tree-link span:last-child{flex:0 0 auto;font-size:10px}
 .sidebar .folder-nav .side-lesson{display:flex;gap:7px;align-items:flex-start;margin:1px 2px 1px 0;padding:6px 7px 6px max(8px,calc(var(--depth) * 12px + 17px));border:0;border-radius:7px;background:transparent;text-align:left;color:#abc9ce;font-size:11px;line-height:1.35;width:100%;min-height:29px;overflow-wrap:anywhere;cursor:pointer}
 .sidebar .folder-nav .side-lesson::before{content:'▶';color:#8fb4b7;font-size:9px;flex:0 0 auto;margin-top:2px}
 .sidebar .folder-nav .side-lesson:hover,.sidebar .folder-nav .side-lesson:focus-visible{background:#2e515d;color:#fff}
@@ -2681,7 +2681,17 @@ el.main.innerHTML=`<div class="header-top"><div class="crumb"><button type="butt
 }
 function statCard(num,label,percent){return `<div class="stat"><div class="stat-num">${num}</div><div class="stat-label">${label}</div>${percent!==undefined?`<div class="progress-track"><div class="progress-fill" style="width:${percent}%"></div></div>`:''}</div>`}
 function countFolders(c){let n=0;walkFolders(c,()=>n++);return n}
-function render(){if(!findCourse(selected)&&data.courses.length)selected=data.courses[0].id;renderSidebar();renderMain()}
+function render(){
+ if(!findCourse(selected)&&data.courses.length)selected=data.courses[0].id;
+ const panelScroll=el.side.scrollTop;
+ const oldTree=el.side.querySelector('.folder-nav');
+ const treeScroll=oldTree?oldTree.scrollTop:0;
+ renderSidebar();
+ renderMain();
+ el.side.scrollTop=panelScroll;
+ const nextTree=el.side.querySelector('.folder-nav');
+ if(nextTree)nextTree.scrollTop=treeScroll;
+}
 function updated(msg){persist();render();notify(msg)}
 function openDialog(which,content){const d=which==='detail'?el.detail:which==='install'?el.install:el.edit;d.innerHTML=content;d.showModal();d.querySelector('input:not([type=hidden]),select,textarea')?.focus();}
 function showInstallGuide(){const installed=window.matchMedia?.('(display-mode: standalone)').matches||navigator.standalone===true;const content=`<div class="install-guide"><p>Study Hub can open on iPhone or iPad as a separate home-screen app using this same website.</p>${installed?'<div class="hint"><strong>App mode active</strong>You are already opening Study Hub as a web app.</div>':''}<ol><li>Open <strong>https://binhan197.github.io/STUDYHUB/</strong> in <strong>Safari</strong> on your iPhone or iPad.</li><li>Tap the <strong>Share</strong> icon (square with an upward arrow). Depending on Safari layout, first tap the page menu.</li><li>Choose <strong>Add to Home Screen</strong>. If available, turn on <strong>Open as Web App</strong>.</li><li>Tap <strong>Add</strong>, then open the new <strong>Study Hub</strong> icon from your Home Screen.</li></ol><div class="hint"><strong>About saved data</strong>Courses, notes, and progress stay on this device/browser. They do not automatically sync to your iPad, iPhone or Mac. Export JSON Backup before moving devices and import it on the other device.</div><p style="margin-top:15px">The interface can open offline after the first successful online visit. YouTube, Khan Academy, MIT, and other external learning materials still require internet.</p><div class="install-footer"><button class="btn primary" data-action="close-dialog">Got it</button></div></div>`;openDialog('install',shell('Install Study Hub on iPhone / iPad','No App Store or extra software required',content))}
