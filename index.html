@@ -833,6 +833,28 @@
               "folders": [],
               "resources": [
                 {
+                  "id": "l03-khan-osmosis",
+                  "title": "FOUNDATION — Khan Academy: Diffusion and Osmosis",
+                  "url": "https://www.khanacademy.org/science/ap-biology/cell-structure-and-function/cell-structure-and-function/mechanisms-of-transport-tonicity-and-osmoregulation/v/diffusion-and-osmosis",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slides 14–15. Build intuition for semipermeable membranes, concentration gradients and water movement between ECF and ICF.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "l03-khan-tonicity",
+                  "title": "FOUNDATION — Khan Academy: Hypotonic, Isotonic and Hypertonic Solutions",
+                  "url": "https://www.khanacademy.org/science/up-class-9th-science/x699e14d392a80aeb%3Athe-fundamental-unit-of-life/x699e14d392a80aeb%3Aweek-1/v/hypotonic-isotonic-and-hypertonic-solutions-tonicity",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slides 14–16. Predict cell swelling/shrinkage before tackling Darrow–Yannet scenarios. Simple introductory explanation, not the full six-disturbance model.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
                   "id": "l03-shifts-1",
                   "title": "Osmosis, Osmolarity & Osmotic Equilibrium",
                   "url": "https://www.youtube.com/watch?v=03yoPfRORGY",
@@ -897,6 +919,50 @@
               "folders": [],
               "resources": [
                 {
+                  "id": "l03-khan-countercurrent",
+                  "title": "FOUNDATION — Khan Academy: Countercurrent Multiplication in the Kidney",
+                  "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/the-renal-system/v/countercurrent-multiplication-in-the-kidney",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slides 25–28. Descending water movement, ascending NaCl transport, and formation of the renal medullary osmotic gradient.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "l03-khan-adh-effects",
+                  "title": "FOUNDATION — Khan Academy: ADH Effects on Blood Pressure",
+                  "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/renal-regulation-of-blood-pressure/v/adh-effects-on-blood-pressure",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slides 22–24 and 26–29. ADH-mediated collecting duct aquaporin insertion, water reabsorption and systemic fluid balance; supplements V2/cAMP details.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "l03-khan-aldosterone-adh",
+                  "title": "FOUNDATION — Khan Academy: Aldosterone and ADH",
+                  "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/renal-regulation-of-blood-pressure/v/aldosterone-and-adh",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slides 22–24. Distinguish salt/volume regulation by aldosterone from ADH-mediated water retention and osmolarity changes.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "l03-khan-renal-article",
+                  "title": "REVIEW — Khan Academy: Renal Physiology Countercurrent Multiplication",
+                  "url": "https://en.khanacademy.org/test-prep/mcat/organ-systems/the-renal-system/a/renal-physiology-counter-current-multiplication",
+                  "provider": "Khan Academy",
+                  "type": "article",
+                  "description": "Slides 25–29. Illustrated written review of medullary concentration, urea recycling and ADH effects; article rather than video.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
                   "id": "l03-renal-1",
                   "title": "Antidiuretic Hormone (ADH / Vasopressin)",
                   "url": "https://www.youtube.com/watch?v=HL89x3BTnmY",
@@ -938,6 +1004,28 @@
               "level": "advanced",
               "folders": [],
               "resources": [
+                {
+                  "id": "l03-khan-lymph-need",
+                  "title": "FOUNDATION — Khan Academy: Why We Need a Lymphatic System",
+                  "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/lymphatic-system/v/why-do-we-need-a-lymphatic-system",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slides 30–32. Learn how capillary fluid filtration and lymphatic drainage relate to tissue edema; not a full quantitative Starling derivation.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
+                {
+                  "id": "l03-khan-lymph-fluid",
+                  "title": "FOUNDATION — Khan Academy: What Is Actually in Lymph",
+                  "url": "https://www.khanacademy.org/test-prep/mcat/organ-systems/lymphatic-system/v/what-is-lymph",
+                  "provider": "Khan Academy",
+                  "type": "video",
+                  "description": "Slides 30–32. Compare plasma, interstitial fluid and lymph, especially colloid proteins and hydrostatic/oncotic forces. Some explanations use the classical capillary reabsorption model.",
+                  "done": false,
+                  "star": false,
+                  "notes": ""
+                },
                 {
                   "id": "l03-starling-1",
                   "title": "Fluid Exchange in Capillaries — Starling Forces",
@@ -1131,6 +1219,23 @@ try{const stored=localStorage.getItem(KEY),old=localStorage.getItem(LEGACY_KEY);
  if(localCourse.folders.some(f=>f.id===template.id))return;
  localCourse.folders.push(clone(template));
  try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){storeAvailable=false}
+})();
+// Supplement Lecture #3 with independently verified Khan Academy foundations; preserve existing progress.
+(function mergeLecture03KhanFoundations(){
+ const targetCourse=data.courses.find(c=>c.id==='course-physiology')||data.courses.find(c=>c.name==='Physiology');
+ const root=targetCourse?.folders?.find(f=>f.id==='folder-body-fluid-physiology');
+ const sourceCourse=SEED.courses.find(c=>c.id==='course-physiology');
+ const sourceRoot=sourceCourse?.folders?.find(f=>f.id==='folder-body-fluid-physiology');
+ if(!root||!sourceRoot)return;
+ let changed=false;
+ for(const srcFolder of sourceRoot.folders||[]){
+  const dstFolder=root.folders?.find(f=>f.id===srcFolder.id);
+  if(!dstFolder)continue;
+  const existing=new Set((dstFolder.resources||[]).map(r=>r.id));
+  const incoming=(srcFolder.resources||[]).filter(r=>r.id.startsWith('l03-khan-')&&!existing.has(r.id));
+  if(incoming.length){dstFolder.resources.unshift(...clone(incoming));changed=true;}
+ }
+ if(changed)try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){storeAvailable=false}
 })();
 let collapsed=new Set();try{const saved=JSON.parse(localStorage.getItem(FOLD_KEY)||'null');if(Array.isArray(saved)){collapsed=new Set(saved)}else{for(const c of data.courses)walkFolders(c,(f,parent,depth)=>{if(depth>=2)collapsed.add(f.id)})}}catch(e){}
 let selected=data.courses[0]?.id||null, activeFolder=null, search='', filter='all', kind='all', currentDetail=null, dragging=null;

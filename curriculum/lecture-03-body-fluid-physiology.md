@@ -103,3 +103,26 @@ Slides 40–43: perivascular CSF–ISF exchange, astrocyte endfeet/AQP4, sleep d
 - Explain CSF formation and drainage, CSF protection and pH-dependent respiratory signaling, hydrocephalus, and the perivascular glymphatic hypothesis.
 
 **Evidence / completeness note:** Most chapters include direct verified YouTube video links. Sections RVD/RVI and glymphatic research are supplemented with original reviews or university research to preserve graduate-level coverage. Some Osmosis lessons may require access. This public index is not a medical treatment protocol.
+
+## Khan Academy foundations (added 28 October 2026)
+
+These lessons appear **first** in each appropriate Study Hub section. Other advanced lectures remain in place.
+
+### 03 — Osmotic Fluid Shifts, RVD/RVI & Dysnatremia
+
+1. [Khan Academy: Diffusion and Osmosis](https://www.khanacademy.org/science/ap-biology/cell-structure-and-function/cell-structure-and-function/mechanisms-of-transport-tonicity-and-osmoregulation/v/diffusion-and-osmosis) — video. Slides 14–15. Build intuition for semipermeable membranes, concentration gradients and water movement between ECF and ICF.
+2. [Khan Academy: Hypotonic, Isotonic and Hypertonic Solutions](https://www.khanacademy.org/science/up-class-9th-science/x699e14d392a80aeb%3Athe-fundamental-unit-of-life/x699e14d392a80aeb%3Aweek-1/v/hypotonic-isotonic-and-hypertonic-solutions-tonicity) — video. Slides 14–16. Predict cell swelling/shrinkage before tackling Darrow–Yannet scenarios. Simple introductory explanation, not the full six-disturbance model.
+
+### 04 — ADH, Countercurrent Mechanisms & Aquaporins
+
+1. [Khan Academy: Countercurrent Multiplication in the Kidney](https://www.khanacademy.org/test-prep/mcat/organ-systems/the-renal-system/v/countercurrent-multiplication-in-the-kidney) — video. Slides 25–28. Descending water movement, ascending NaCl transport, and formation of the renal medullary osmotic gradient.
+2. [Khan Academy: ADH Effects on Blood Pressure](https://www.khanacademy.org/test-prep/mcat/organ-systems/renal-regulation-of-blood-pressure/v/adh-effects-on-blood-pressure) — video. Slides 22–24 and 26–29. ADH-mediated collecting duct aquaporin insertion, water reabsorption and systemic fluid balance; supplements V2/cAMP details.
+3. [Khan Academy: Aldosterone and ADH](https://www.khanacademy.org/test-prep/mcat/organ-systems/renal-regulation-of-blood-pressure/v/aldosterone-and-adh) — video. Slides 22–24. Distinguish salt/volume regulation by aldosterone from ADH-mediated water retention and osmolarity changes.
+4. [Khan Academy: Renal Physiology Countercurrent Multiplication](https://en.khanacademy.org/test-prep/mcat/organ-systems/the-renal-system/a/renal-physiology-counter-current-multiplication) — illustrated article. Slides 25–29. Illustrated written review of medullary concentration, urea recycling and ADH effects; article rather than video.
+
+### 05 — Starling Forces, Capillary Exchange & Edema
+
+1. [Khan Academy: Why We Need a Lymphatic System](https://www.khanacademy.org/test-prep/mcat/organ-systems/lymphatic-system/v/why-do-we-need-a-lymphatic-system) — video. Slides 30–32. Learn how capillary fluid filtration and lymphatic drainage relate to tissue edema; not a full quantitative Starling derivation.
+2. [Khan Academy: What Is Actually in Lymph](https://www.khanacademy.org/test-prep/mcat/organ-systems/lymphatic-system/v/what-is-lymph) — video. Slides 30–32. Compare plasma, interstitial fluid and lymph, especially colloid proteins and hydrostatic/oncotic forces. Some explanations use the classical capillary reabsorption model.
+
+**Coverage gaps:** We did not find directly matching verified Khan Academy lessons for the 60–40–20 body-water compartment rule in full, indicator dilution to measure TBW/ECF/plasma, all six Darrow–Yannet diagrams, detailed RVD/RVI, the complete classical/revised Starling equation, or specialized CSF and glymphatic transport. Keep the existing non-Khan sources for these advanced topics.
