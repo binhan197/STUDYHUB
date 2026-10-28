@@ -470,6 +470,223 @@ dialog#lessonDialog .dialog-body{padding:12px 16px 20px}
  .lesson-notes-collapse summary,.lesson-info-collapse summary{padding:14px}
 }
 
+
+/* STUDY HUB: High Contrast Emerald + Rose
+   Dark grounding, visibly green navigation, pink selections, bright high-contrast controls.
+   Maintains the video-first lesson player, notes and storage behavior. */
+:root{
+ color-scheme:dark;
+ --bg:#12151a;--paper:#24252b;--card:#24252b;
+ --ink:#fbf9fc;--muted:#d8cfdb;--line:#56645d;
+ --accent:#f4b8d0;--accent-light:#543348;
+ --dark:#142c25;--dark2:#234537;--rose:#f4b8d0;--rose-light:#57354d;
+ --shadow:0 11px 28px rgba(0,0,0,.26)
+}
+html{background:#12151a}
+body{
+ background:
+ radial-gradient(ellipse at 95% 0%,rgba(219,114,163,.17),transparent 40%),
+ radial-gradient(ellipse at 0% 86%,rgba(61,153,104,.11),transparent 36%),
+ #12151a;
+ color:#fbf9fc
+}
+button:focus-visible,input:focus-visible,textarea:focus-visible,
+select:focus-visible,a:focus-visible,summary:focus-visible{
+ outline:3px solid #f6bfd7;outline-offset:3px
+}
+.sidebar{
+ background:linear-gradient(170deg,#17362a 0%,#173026 55%,#292031 100%);
+ border-right:2px solid #48745b;color:#fbfafb
+}
+.sidebar-brand-row,.side-tail{border-color:#5f856b}
+.sidebar .brand-mark{
+ background:#f4b8d0;border:1px solid #ffd4e5;color:#281a25;
+ box-shadow:0 4px 16px rgba(255,171,207,.2)
+}
+.sidebar .brand-title{color:#fff}.sidebar .brand-sub{color:#deebdf}
+.sidebar-dismiss{background:#2d4c3c;border:1px solid #80a48c;color:#f2fff4}
+.sidebar-dismiss:hover{background:#6b3f58;border-color:#f3abc9;color:#fff}
+.side-section-title{color:#d2f3dd;font-size:11px}
+.side-section-count{background:#57394e;color:#ffe3ee;border-color:#bc809e}
+.side-mini-action{background:#2c4e3c;color:#f1ffef;border:1px solid #78ab89}
+.side-mini-action:hover{background:#71445d;color:#fff4f8;border-color:#f5b8d0}
+.sidebar .nav-entry{
+ background:#244536;color:#f5fff6;border:1px solid #558165;
+ box-shadow:0 4px 14px rgba(0,0,0,.12)
+}
+.sidebar .nav-entry:hover{background:#345b45;border-color:#a7edbd}
+.sidebar .nav-entry.active{
+ background:#efb1cb!important;border:2px solid #ffd7e8!important;
+ color:#251824!important;box-shadow:0 5px 18px rgba(233,140,178,.22)
+}
+.sidebar .nav-entry.active strong,.sidebar .nav-entry.active small{color:#281826!important}
+.sidebar .nav-circle{background:#3d6e51;color:#f1fff3}
+.sidebar .nav-entry.active .nav-circle{background:#653e57;color:#fff}
+.sidebar .nav-entry small{color:#d1e8d7}
+.course-meter{background:#4d755b}
+.course-meter span{background:linear-gradient(90deg,#a0efb8,#f1a0c3)}
+.sidebar .nav-entry.active .course-meter{background:#a4768f}
+.course-nav-row>.rename-inline{color:#dbf0e0}
+.sidebar .nav-entry.active~.rename-inline{color:#362030}
+.course-nav-row>.rename-inline:hover{background:#86546c;color:#fff}
+.sidebar .folder-nav{
+ background:#152920;border:1px solid #5c8969;box-shadow:inset 0 0 0 1px rgba(21,52,39,.3);
+ scrollbar-color:#88bd95 #152920
+}
+.sidebar .tree-caret{color:#b4edc5;font-size:17px}
+.sidebar .tree-caret:hover{background:#34664a;color:#fff}
+.sidebar .tree-link{color:#f3f7f2;font-size:12.5px}
+.sidebar .tree-link span:first-child{color:inherit;font-size:12.5px;line-height:1.42}
+.sidebar .tree-link:hover{background:#355b44;color:#fff}
+.sidebar .tree-link.selected{
+ background:#e7a5c1!important;color:#2e1827!important;font-weight:750
+}
+.sidebar .tree-link span:last-child{background:#2b503a;color:#e0f6e6}
+.sidebar .tree-link.selected span:last-child{background:#6f4562;color:#fff}
+.sidebar .tree-item .rename-inline{color:#c9e7d0}
+.sidebar .tree-item .rename-inline:hover{background:#73455f;color:#fff}
+.sidebar .folder-nav .side-lesson{color:#e1e9e1;font-size:12px;line-height:1.45}
+.sidebar .folder-nav .side-lesson::before{color:#f4b8d0}
+.sidebar .folder-nav .side-lesson:hover,
+.sidebar .folder-nav .side-lesson:focus-visible{background:#5e3b52;color:#fff}
+.sidebar .folder-nav .side-lesson .side-done{color:#a0edb9}
+.sidebar .hint-dark,.side-empty{color:#e0ecdf}
+.side-device{background:#304c3c;border-color:#7aa58a;color:#f3fbf3}
+.side-device:hover{background:#75455f;border-color:#f5bcce;color:#fff}
+.side-device-icon{color:#ffcee1}
+.side-footnote{color:#dce8df}
+.side-footnote a{color:#ffd0e3}
+.main{color:#f9f8fb}
+.header-top .crumb,.crumb{color:#e3d9e6}
+.nav-open-btn,.library-settings-button{
+ background:#274a38;color:#f3fff4;border:1px solid #83b596
+}
+.nav-open-btn:hover,.library-settings-button:hover{
+ background:#72445e;color:#fff;border-color:#ffc5dc
+}
+.status-pill{background:#253b31;border-color:#7ca38a;color:#e5f8e9}
+.hero{
+ background:linear-gradient(120deg,#573248 0%,#432c45 48%,#234835 100%);
+ border:2px solid #aa7a99;box-shadow:0 14px 32px rgba(0,0,0,.23)
+}
+.hero h1{color:#fff}
+.hero p{color:#f1e1ea}
+.eyebrow{color:#ffd3e5}
+.btn{background:#364b3e;border:1px solid #7aa188;color:#f9fff8}
+.btn:hover,.btn:not(.primary):hover{
+ background:#73445e;border-color:#eeb4cf;color:#fff
+}
+.btn.primary{
+ background:#f1b2ce;color:#241622;border:1px solid #ffd4e5;font-weight:800
+}
+.btn.primary:hover{background:#ffcee3;color:#251725;border-color:#ffe3ef}
+.btn.subtle{color:#f0e1ee}
+.btn.danger{background:#5e303b;border-color:#cf8598;color:#fff1f2}
+.stats{gap:14px}
+.stat{background:#242831;border:1px solid #687a6c;box-shadow:0 5px 15px rgba(0,0,0,.1)}
+.stat:nth-child(even){border-color:#986e8b}
+.stat-num{color:#fff}
+.stat-label{color:#e0d6e3;font-size:12px}
+.progress-track{background:#4b4b56}
+.progress-fill{background:linear-gradient(90deg,#9cefb6,#f2a6c9)}
+.title-block h2{color:#fff}
+.title-block p{color:#dce1de}
+.toolbar .searchbox,.searchbox,.toolbar select{
+ background:#272f2c;border:1px solid #87a993;color:#f5fff7
+}
+.searchbox input{color:#fff}
+.searchbox input::placeholder{color:#d1d9d3}
+.toolbar select option{background:#203629;color:#fff}
+.folder-card,.section-card{
+ background:#27252e;border:1px solid #77707d;
+ box-shadow:0 7px 20px rgba(0,0,0,.12)
+}
+.folder-card.root-folder{border:2px solid #799f84}
+.folder-head{background:#304236}
+.folder-heading-button{color:#fff}
+.folder-heading-button:hover{background:#42624b}
+.folder-main strong,.section-name{color:#fff}
+.folder-desc,.section-goal{color:#e0d9e2}
+.folder-chevron,.section-caret{color:#d6f6dd}
+.folder-tile{background:#506b55;color:#e7ffec}
+.folder-stats,.section-progress{color:#e4e5e5}
+.folder-inside,.section-body{border-top:1px solid #5c6e63}
+.nested-folders{border-left:2px solid #b97a9a}
+.folder-rename{background:#6b3e58;border:1px solid #f2b0cf;color:#fff}
+.folder-rename:hover{background:#995a7a}
+.section-index{background:#794760;border:1px solid #edafcd;color:#fff}
+.tag{background:#3a4540;border:1px solid #8cae96;color:#f3fff4}
+.tag.advanced{background:#68415b;border-color:#e4a1bf;color:#fff0f9}
+.tag.video{background:#365c45;border-color:#9de1b0;color:#f2fff5}
+.lesson-row{border-bottom:1px solid #42444b}
+.lesson-row:hover{background:#3d3441;border-color:#9c7791}
+.lesson-title{color:#fff;font-size:13.5px}
+.lesson-title:hover{color:#ffc9df}
+.lesson-row.completed .lesson-title{color:#d6ded6}
+.lesson-description,.lesson-tags{color:#e0d5df;font-size:12px;line-height:1.5}
+.check{background:#303b35;border:2px solid #b3cbb9;color:#fff}
+.check.checked{background:#9be9b0;border-color:#d0ffda;color:#182a1e}
+.tinybtn{color:#f1d5e2}
+.tinybtn:hover{background:#734d63;color:#fff}
+.tinybtn.star-on{color:#ffcae0}
+.a-link,.a-link.watch-action{
+ background:#a5eabb;border:1px solid #d8ffe4;color:#192c20;
+ font-size:12px;font-weight:850;padding:8px 11px;border-radius:10px
+}
+.a-link:hover,.a-link.watch-action:hover{
+ background:#cff9da;border-color:#fff;color:#142c1e
+}
+.inline-pencil{color:#f5bfd5}
+.inline-pencil:hover{background:#704d67;color:#fff}
+.empty{background:#222a29;border:1px dashed #7a9b84;color:#ebf2ea}
+.empty strong{color:#fff}
+dialog{background:#242128;color:#fff;border:2px solid #a57e97}
+.dialog-top,dialog#lessonDialog .dialog-top{background:#3a2b3b;border-bottom:1px solid #a17d97}
+.dialog-top h2{color:#fff}
+.dialog-top small,.dialog-body{color:#f5e8f1}
+.dialog-footer{background:#27232b}
+.x{background:#6e455e;color:#fff}
+.x:hover{background:#955c7b}
+.field label,.notes-content label{color:#fff0f8}
+.field input,.field textarea,.field select,.note-box textarea,
+.notes-content textarea{
+ background:#1c2322;border:1px solid #9bb6a0;color:#fff
+}
+.field input::placeholder,.field textarea::placeholder,
+.note-box textarea::placeholder,.notes-content textarea::placeholder{color:#c9d3ca}
+.field input:focus,.field textarea:focus,.field select:focus,
+.notes-content textarea:focus{border-color:#f0aecd}
+.field-hint,.field-hint small{color:#e4d7e1}
+.note-box,.tipbox{background:#2b3431;border-color:#6d8c75}
+.note-box h3{color:#fff}.note-box small{color:#dbe5dc}
+.lesson-detail .detail-desc,.detail-edit>span{color:#f0e5ee}
+.detail-edit{border-top-color:#718178}
+.resource-cover{background:#262c2b;color:#f6eaf3}
+.detail-player-tip{color:#ead2df;font-size:12px}
+.lesson-notes-collapse,.lesson-info-collapse{
+ background:#2b3031;border:1px solid #8d8e8e
+}
+.lesson-notes-collapse summary,.lesson-info-collapse summary{
+ background:#54394d;color:#fff;padding:13px 15px;font-size:14px
+}
+.lesson-notes-collapse[open] summary,.lesson-info-collapse[open] summary{background:#794861}
+.notes-content small{color:#dae3dc}
+.embed-shell{background:#090b0e}
+.library-settings-button{background:#294637}
+.library-tools-note,.library-tools-advanced p{color:#e6e4e7}
+.library-tools-advanced summary{color:#ffc7dc}
+.install-guide,.install-guide p,.install-guide li{color:#fff}
+.install-guide .hint{background:#35473b;color:#fff;border-color:#87b696}
+.install-guide .hint strong{color:#fff}
+.save-notice{background:#75435e;color:#fff}
+@media(max-width:760px){
+ .sidebar{box-shadow:14px 0 40px rgba(0,0,0,.42)}
+ .video-quick-actions .source-link{color:#f6f6f6}
+ dialog#lessonDialog .dialog-top h2{font-size:16px;color:#fff}
+ .sidebar .tree-link{min-height:33px}
+ .sidebar .folder-nav .side-lesson{min-height:33px}
+}
+
 </style></head>
 <body><div class="app"><aside class="sidebar" id="sidebar" aria-label="Study navigation"></aside><div class="sidebar-backdrop" id="sidebarBackdrop"></div><main id="main" class="main" tabindex="-1"></main></div><dialog id="editDialog" aria-label="Edit library item"></dialog><dialog id="lessonDialog" aria-label="Lesson details"></dialog><dialog id="installDialog" aria-label="Install Study Hub"></dialog><input id="importFile" type="file" accept=".json,application/json" hidden><div class="save-notice" id="toast" role="status" aria-live="polite"></div><script type="application/json" id="seed-data">{
   "schemaVersion": 2,
