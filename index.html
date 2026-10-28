@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="light"><meta name="theme-color" content="#477c60"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Study Hub"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icons/icon.svg"><link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png"><meta name="description" content="Study Hub — organize videos into nested course folders, maintain notes and track progress offline."><title>Study Hub · Course Learning Tree</title><style>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="theme-color" content="#132b23"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta name="apple-mobile-web-app-title" content="Study Hub"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" type="image/svg+xml" href="./icons/icon.svg"><link rel="apple-touch-icon" sizes="192x192" href="./icons/icon-192.png"><meta name="description" content="Study Hub — organize videos into nested course folders, maintain notes and track progress offline."><title>Study Hub · Course Learning Tree</title><style>
   :root{--bg:#f6f7f8;--paper:#fff;--ink:#1e2934;--muted:#66717e;--line:#e4e8ed;--accent:#285a62;--accent-light:#edf5f4;--dark:#152631;--dark2:#223742;--card:#fff;--radius:16px;--shadow:0 8px 32px rgba(30,47,64,.045)}
   *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Arial,sans-serif;color:var(--ink)}
   button,input,select,textarea{font:inherit}button{cursor:pointer}a{color:inherit;text-decoration:none}button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid #7ab1b5;outline-offset:3px}
@@ -175,6 +175,187 @@ dialog::backdrop{background:#173b2c8c}
 @media(max-width:760px){.app,.app.sidebar-collapsed{display:block}.sidebar{width:min(88vw,330px);max-width:min(88vw,330px);box-shadow:15px 0 40px #21442e29;border-right:1px solid #dce7df}.sidebar .folder-nav{max-height:50dvh;min-height:180px}.main{padding-top:16px}.header-top{gap:7px}.library-tools-grid{grid-template-columns:1fr}}
 
 @media(max-width:760px){.header-top{flex-wrap:wrap;align-items:center}.header-top .crumb{flex:1 1 100%;width:100%}.header-top .status-pill{flex:0 1 auto;max-width:calc(100% - 90px)}.header-top .library-settings-button{margin-left:auto}}
+
+/* Study Hub — Forest & Rose Dark Edition, 2026-10-28
+   Contrast-first dark surfaces; source data and interaction logic remain unchanged. */
+:root {
+ color-scheme: dark;
+ --bg:#0b1713;--paper:#182b24;--card:#182b24;--ink:#edf5ef;
+ --muted:#aec3b6;--line:#2e4b3f;--accent:#8ad1a7;
+ --accent-light:#243f31;--dark:#10231c;--dark2:#19382c;
+ --rose:#e0a0b6;--rose-light:#402b38;
+ --shadow:0 10px 30px rgba(0,0,0,.20)
+}
+html {background:#0b1713;color-scheme:dark}
+body{color:var(--ink);background:radial-gradient(ellipse at 92% 2%,rgba(139,67,102,.15),transparent 35%),linear-gradient(145deg,#0a1712,#101e19 70%,#1c1d1e);min-height:100vh}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid #f1b3c9;outline-offset:3px}
+::selection{background:#75445e;color:#fff}
+.sidebar{
+ background:linear-gradient(177deg,#112a20 0%,#10231d 48%,#211c22 100%);
+ border-right:1px solid #315343;color:#e3f2e7;
+ box-shadow:6px 0 30px rgba(0,0,0,.18)
+}
+.sidebar-brand-row{border-bottom:1px solid #355143}
+.sidebar .brand-mark{background:linear-gradient(145deg,#a86587,#d995ac);border-color:#e0a5ba;color:#0c251c;box-shadow:0 7px 22px rgba(185,91,130,.25)}
+.sidebar .brand-title{color:#f4f9f2}
+.sidebar .brand-sub{color:#a6bbae}
+.sidebar-dismiss{background:#203a2e;border-color:#3a5c4c;color:#d9ebde;box-shadow:none}
+.sidebar-dismiss:hover{background:#59374b;border-color:#b77793;color:#fff}
+.side-section-title{color:#bad4bf}
+.side-section-count{background:#4c3042;border:1px solid #7b4b63;color:#f2bfd1}
+.side-mini-action{background:#203b2e;border-color:#3a5f4b;color:#c1e9c9}
+.side-mini-action:hover{background:#493044;border-color:#c37b98;color:#f7cee0}
+.sidebar .nav-entry{background:#193328;color:#e4f1e7;border-color:#345645;box-shadow:0 3px 14px rgba(0,0,0,.10)}
+.sidebar .nav-entry:hover{background:#244737;border-color:#70a786;color:#fff}
+.sidebar .nav-entry.active{background:linear-gradient(112deg,#503143 0%,#402b37 70%,#29372d 100%);border-color:#bd8099;color:#fff5f8;box-shadow:0 4px 20px rgba(204,116,157,.13)}
+.sidebar .nav-entry strong{color:inherit}
+.sidebar .nav-entry small{color:#b6c9bf}
+.sidebar .nav-circle{background:#315b45;color:#c4ecd0}
+.sidebar .nav-entry.active .nav-circle{background:#a96a89;color:#fff}
+.course-meter{background:#375748}
+.course-meter span{background:linear-gradient(90deg,#90d5ab,#e6a2ba)}
+.course-nav-row>.rename-inline,.sidebar .tree-item .rename-inline{color:#b0caba}
+.course-nav-row>.rename-inline:hover,.sidebar .tree-item .rename-inline:hover{background:#50334a;color:#f5c3d5}
+.sidebar .folder-nav{background:#152a22;border:1px solid #315143;box-shadow:0 6px 20px rgba(0,0,0,.15);scrollbar-color:#51755f #152a22}
+.sidebar .tree-item{color:#d4e7d8}
+.sidebar .tree-caret{color:#9bc6a8}
+.sidebar .tree-caret:hover{background:#2b4938;color:#e6f5eb}
+.sidebar .tree-link{color:#d4e9db}
+.sidebar .tree-link:hover{background:#2b4938;color:#fff}
+.sidebar .tree-link.selected{background:#553549;color:#f9d2e0}
+.sidebar .tree-link span:first-child{color:inherit}
+.sidebar .tree-link span:last-child{background:#2c4a3a;color:#acc9b7}
+.sidebar .tree-link.selected span:last-child{background:#78475e;color:#f6c4d7}
+.sidebar .folder-nav .side-lesson{color:#bad0c2}
+.sidebar .folder-nav .side-lesson::before{color:#e2a2ba}
+.sidebar .folder-nav .side-lesson:hover,.sidebar .folder-nav .side-lesson:focus-visible{background:#4d3143;color:#ffe5ef}
+.sidebar .folder-nav .side-done{color:#a6e6b9}
+.sidebar .hint-dark,.side-empty{color:#a4bdae}
+.side-tail{border-top:1px solid #375445}
+.side-device{background:#213a2e;border:1px solid #395947;color:#d6edda}
+.side-device:hover{background:#533448;border-color:#a66a83;color:#ffe0eb}
+.side-device-icon,.side-footnote a{color:#e3a2b9}
+.side-footnote{color:#a9beb0}
+.main{color:#e4f0e8}
+.header-top .crumb,.crumb{color:#bacdbf}
+.nav-open-btn,.library-settings-button{background:#1c3328;border:1px solid #365d47;color:#c5e9d0;box-shadow:none}
+.nav-open-btn:hover,.library-settings-button:hover{background:#503146;color:#ffe0ec;border-color:#a16a83}
+.status-pill{background:#1b3227;border:1px solid #365341;color:#b9d7c1}
+.status-pill i{background:#9ddbb5!important}
+.hero{
+ background:linear-gradient(111deg,#193c2b 0%,#1c3029 48%,#452b3e 100%);
+ border:1px solid #45614d;box-shadow:0 16px 40px rgba(0,0,0,.16)
+}
+.hero::after{border-color:#a46e8a;opacity:.24}
+.hero h1{color:#f5faf5}
+.hero p{color:#c8dbcd}
+.eyebrow{color:#e9b3c5}
+.btn{background:#233a2e;border:1px solid #40614c;color:#e0f0e5}
+.btn:hover,.btn:not(.primary):hover{background:#463044;border-color:#a7738c;color:#fff0f7}
+.btn.primary{background:#86cba0;border:1px solid #9bd8b0;color:#102b1e;font-weight:780}
+.btn.primary:hover{background:#a5e0b7;border-color:#b8edc9;color:#102b1e}
+.btn.subtle{background:transparent;border-color:transparent;color:#bfd5c6}
+.btn.subtle:hover{background:#354f3e}
+.btn.danger{background:#422e32;border-color:#985e65;color:#ffcbcd}
+.btn.danger:hover{background:#65373e;border-color:#e296a0}
+.btn:disabled{opacity:.45}
+.stats{color:#e6f3e8}
+.stat{background:#172b23;border:1px solid #324d3e;box-shadow:0 6px 19px rgba(0,0,0,.08)}
+.stat-num{color:#eff9ee}
+.stat-label{color:#afc7b7}
+.progress-track{background:#345343}
+.progress-fill{background:linear-gradient(90deg,#7ac59b,#e19db8)}
+.title-block h2{color:#eff8ef}
+.title-block p{color:#b8cdbb}
+.toolbar .searchbox,.searchbox{background:#1b3027;border:1px solid #3e5a49;color:#bfdbcb}
+.searchbox input{background:transparent;color:#f0f8f1;caret-color:#e5a4bd}
+.searchbox input::placeholder{color:#9bb6a5}
+.toolbar select{background:#1b3027;border:1px solid #3e5a49;color:#e9f4e9}
+.toolbar select option{background:#192e24;color:#e9f4e9}
+.section-card,.folder-card,.stat{box-shadow:0 6px 18px rgba(0,0,0,.08)}
+.folder-card,.section-card{background:#182e25;border:1px solid #345546}
+.folder-card.root-folder{border-color:#527961}
+.folder-head{background:#203a2e}
+.folder-heading-button{color:#e5f3e8}
+.folder-heading-button:hover{background:#2c4a39}
+.folder-main strong,.section-name{color:#f0f8f0}
+.folder-desc,.section-goal{color:#b5cbbd}
+.folder-chevron,.section-caret{color:#9acdad}
+.folder-stats,.section-progress{color:#a9c4b1}
+.folder-tile{background:#355b43;color:#c1e8cb}
+.folder-inside,.section-body{border-top:1px solid #365345}
+.nested-folders{border-left:2px solid #486753}
+.folder-empty,.empty{color:#b9cabd}
+.folder-ops .btn{background:#203b2e;color:#d9efde}
+.folder-ops .btn:hover{background:#463348;color:#fce2ec}
+.folder-rename{background:#3b2a3c;border-color:#85546d;color:#ecc2d2}
+.folder-rename:hover{background:#57334a;color:#fff}
+.inline-pencil{color:#c3a6b1}
+.inline-pencil:hover{background:#4d3144;color:#fbd2e0}
+.section-index{background:#4b3446;border-color:#87576f;color:#ffcee0}
+.tag{background:#293e32;border:1px solid #41614d;color:#c6d9cd}
+.tag.advanced{background:#493246;border-color:#85566d;color:#f0c4d4}
+.tag.video{background:#284835;border-color:#4c785b;color:#c1efcf}
+.lesson-row:hover{background:#253e31;border-color:#3c5b49}
+.lesson-row.dropmark{background:#3b3644;border-color:#bd839d}
+.lesson-number{color:#9ab5a4}
+.lesson-title{color:#edf7ef}
+.lesson-title:hover{color:#f3b9cb}
+.lesson-row.completed .lesson-title{color:#b1c5b4}
+.lesson-description,.lesson-tags{color:#adc5b5}
+.lesson-tags span:before{color:#70927c}
+.check{background:#1d392c;border:1.5px solid #72917c;color:white}
+.check:hover{border-color:#b1e0bf}
+.check.checked{background:#68b487;border-color:#68b487;color:#071a11}
+.tinybtn{color:#bfd0c1}
+.tinybtn:hover{background:#3d3342;color:#fbd5e3}
+.tinybtn.star-on{color:#efb4cd}
+.a-link{background:#2d4032;border:1px solid #4e6b52;color:#d2f4da}
+.a-link:hover{background:#50354a;border-color:#a77690;color:#ffe9ef}
+.resource-cover{background:#1e3e30;color:#c3d4c8}
+.empty{background:#172b23;border:1px dashed #45604e}
+.empty strong{color:#e6f3e8}
+dialog{background:#162c23;color:#ebf5ec;border:1px solid #46604c;box-shadow:0 25px 70px rgba(0,0,0,.48)}
+dialog::backdrop{background:rgba(5,14,10,.78);backdrop-filter:blur(4px)}
+.dialog-top{border-bottom:1px solid #385a46}
+.dialog-top h2{color:#f1f7f1}
+.dialog-top small,.dialog-body{color:#c4d9ca}
+.dialog-footer{background:#172e24}
+.x{background:#2b4637;color:#dcefe0}
+.x:hover{background:#593b4f;color:#fff}
+.field label{color:#cee2d1}
+.field input,.field textarea,.field select,.note-box textarea,.dialog-body input,.dialog-body select,.dialog-body textarea{background:#10251c;border:1px solid #466450;color:#f1f8f1;caret-color:#e7acc1}
+.field input::placeholder,.field textarea::placeholder,.note-box textarea::placeholder{color:#91ad99}
+.field input:focus,.field textarea:focus,.field select:focus,.note-box textarea:focus{border-color:#d58ca9}
+.field-hint,.form-error{color:#dbb2bd}
+.note-box{background:#1d3429;border:1px solid #385a44}
+.note-box h3{color:#e6f4e8}
+.note-box small{color:#acc4b2}
+.lesson-detail .detail-desc,.detail-edit>span{color:#c5d8c8}
+.detail-edit{border-top:1px solid #385745}
+.detail-edit .danger-zone{color:#ffb1b4}
+.embed-shell{background:#0d2119}
+.embed-placeholder{color:#dbebdf}
+.embed-placeholder strong{color:#f0f7f1}
+.embed-placeholder span{color:#abc4b4}
+.tipbox,.install-guide .hint{background:#284133;color:#d4ecdc;border:1px solid #4a6852}
+.install-guide,.install-guide p,.install-guide li{color:#d4e5d7}
+.install-guide .hint strong{color:#f1e6ee}
+.library-tools-note{color:#c1d6c5}
+.library-tools-advanced{border-top:1px solid #385747}
+.library-tools-advanced summary{color:#efa8c2}
+.library-tools-advanced p{color:#b6ccbb}
+.library-settings-button{background:#1b3328}
+.save-notice{background:#335d46;color:#fff}
+.toast-error{background:#813b4e}
+.sidebar-backdrop.show{background:rgba(2,11,7,.75)}
+@media(max-width:760px){
+ .sidebar{box-shadow:16px 0 40px rgba(0,0,0,.48)}
+ .header-top{gap:10px}
+ .hero{border-radius:17px}
+}
+@media(prefers-reduced-motion:reduce){.progress-fill,.lesson-row,.btn{transition:none}}
+
 </style></head>
 <body><div class="app"><aside class="sidebar" id="sidebar" aria-label="Study navigation"></aside><div class="sidebar-backdrop" id="sidebarBackdrop"></div><main id="main" class="main" tabindex="-1"></main></div><dialog id="editDialog" aria-label="Edit library item"></dialog><dialog id="lessonDialog" aria-label="Lesson details"></dialog><dialog id="installDialog" aria-label="Install Study Hub"></dialog><input id="importFile" type="file" accept=".json,application/json" hidden><div class="save-notice" id="toast" role="status" aria-live="polite"></div><script type="application/json" id="seed-data">{
   "schemaVersion": 2,
